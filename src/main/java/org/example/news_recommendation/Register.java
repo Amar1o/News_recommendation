@@ -1,17 +1,53 @@
 package org.example.news_recommendation;
 
+import javafx.fxml.FXML;
+
 import java.sql.*;
 
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+
+
 public class Register {
+    @FXML
+    private TextField firstname;
+
+    @FXML
+    private TextField lastname;
+
+    @FXML
+    private TextField Age;
+
+    @FXML
+    private TextField Preference;
+
+    @FXML
+    private Text success;
+
+    @FXML
+    private TextField result;
+    private member registeredMember;
+
+
+
+    private void clearTextFields() {
+        firstname.clear();
+        lastname.clear();
+        Age.clear();
+        Preference.clear();
+    }
+
+
     public static int register(String firstname, String lastName, int Age, String Preference) throws SQLException, ClassNotFoundException {
         String url = "jdbc:mysql://localhost:3306/truy";
-
+        String username = "root";
+        String password = "";
         String selectSql = "SELECT * FROM members WHERE first_name = ? AND last_name = ?";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Ensure MySQL driver is loaded
 
-            try (Connection connection = DriverManager.getConnection(url);
+            try (Connection connection = DriverManager.getConnection(url, username, password);
                  PreparedStatement selectStmt = connection.prepareStatement(selectSql)) {
 
                 if (connection != null) {
@@ -54,6 +90,32 @@ public class Register {
             System.out.println("Database connection error or query");
             e.printStackTrace();
             return -1;
+        }
+    }
+    @FXML
+    public void Registerc() throws SQLException, ClassNotFoundException {
+
+        String fname = firstname.getText();
+        String lname = lastname.getText();
+        int age = Integer.parseInt(Age.getText());
+        String pref = Preference.getText();
+
+        int result = register(fname, lname, age, pref);
+        switch (result) {
+            case 0:
+                registeredMember = new member(fname, lname, age, pref); // Store registered member
+                clearTextFields();
+                success.setVisible(true);
+                success.setText("Member successfully registered!");
+                System.out.println("Registered Member: " + registeredMember);
+                break;
+            case 1:
+                clearTextFields();
+                this.result.setText("Member already exists");
+                break;
+            default:
+                System.out.println("An error occurred.");
+                break;
         }
     }
 }
