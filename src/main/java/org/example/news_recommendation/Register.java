@@ -92,6 +92,7 @@ public class Register {
             return -1;
         }
     }
+
     @FXML
     public void Registerc() throws SQLException, ClassNotFoundException {
 

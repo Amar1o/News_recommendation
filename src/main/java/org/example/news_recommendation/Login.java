@@ -84,7 +84,26 @@ public class Login {
             System.err.println("Failed to load Register.fxml.");
         }
     }
+    private void switchtoarticle() {
+        try {
+            // Load the news.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Article.fxml"));
+            Parent root = loader.load();
 
+            // Get the current stage (window)
+            Stage stage = (Stage) submit.getScene().getWindow();
+
+            // Set the new scene (news scene)
+            stage.setScene(new Scene(root, 600, 400)); // Adjust width and height as needed
+            stage.setTitle("Articles");
+
+            // Show the stage (already visible, but this ensures the new scene is displayed)
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load news.fxml.");
+        }
+    }
     @FXML
     public void submit() {
         String inputFirstName = firstname.getText();
@@ -95,6 +114,8 @@ public class Login {
         if (result == 1) {
             success.setText("Login successful! Welcome, " + inputFirstName + "!");
             success.setVisible(true);
+            switchtoarticle();
+
 
         } else if (result == 2) {
             success.setText("Invalid first name or last name.");
