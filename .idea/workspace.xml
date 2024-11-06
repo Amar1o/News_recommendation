@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="creation of article fxml">
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="ammending of path to json file containing article dataset">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/jsonreader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/jsonreader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1730836841750</updated>
       <workItem from="1730836842814" duration="3816000" />
-      <workItem from="1730892780887" duration="1522000" />
+      <workItem from="1730892780887" duration="1868000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -112,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730895194981</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="ammending of path to json file containing article dataset">
+      <option name="closed" value="true" />
+      <created>1730895484290</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1730895484290</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,6 +131,7 @@
     <MESSAGE value="Create member class" />
     <MESSAGE value="Create register class and attempt database connection" />
     <MESSAGE value="creation of article fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="creation of article fxml" />
+    <MESSAGE value="ammending of path to json file containing article dataset" />
+    <option name="LAST_COMMIT_MESSAGE" value="ammending of path to json file containing article dataset" />
   </component>
 </project>

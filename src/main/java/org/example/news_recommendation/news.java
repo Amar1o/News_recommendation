@@ -23,43 +23,29 @@ public class news {
     private JsonArray articles; // Holds all articles received from the API
     private int currentIndex = 0; // Keeps track of the currently displayed article
 
-    public JsonArray readfile() {
-        JsonArray jsonArray = new JsonArray();
-        String file = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
-                jsonArray.add(jsonObject);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return jsonArray;
-    }
 
 
     @FXML
     public void loadArticlesbutton() {
-        // Assuming 'preference' is the genre you want to use to fetch articles
+        String filePath = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
         try {
-            articles = readfile(); // Fetch articles from the JSON file
+            jsonreader jsonArticleReader = new jsonreader(filePath);
+            articles = jsonArticleReader.readFile(); // Fetch articles from the JSON file
 
             // Check if articles were retrieved successfully
             if (articles != null && articles.size() > 0) {
                 displayArticle(0); // Display the first article
             } else {
                 title.setText("No articles found.");
-                content.setText(""); // Clear content if no articles are found
+                content.setText("");
             }
-        } catch (Exception e) { // Catching general exception as readfile() does not throw IOException anymore
-            e.printStackTrace(); // Log the error for debugging
+        } catch (Exception e) {
+            e.printStackTrace();
             title.setText("Error fetching articles.");
             content.setText("Unable to load articles. Please check the file format and content.");
         }
     }
-
     private void displayArticle ( int index){
         if (articles != null && index >= 0 && index < articles.size()) {
             JsonObject article = articles.get(index).getAsJsonObject();
