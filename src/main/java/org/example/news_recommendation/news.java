@@ -25,7 +25,7 @@ public class news {
 
     public JsonArray readfile() {
         JsonArray jsonArray = new JsonArray();
-        String file = "src/main/java/org/example/demo/News_Category_Dataset_v3.json";
+        String file = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line;
