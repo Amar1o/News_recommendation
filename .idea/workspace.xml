@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="encapsulate json reading functionality">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/jsonreader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/jsonreader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" afterDir="false" />
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +69,7 @@
       <recent name="E:\progam\News_recommendation\src\main\java\org\example\news_recommendation" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LLMAPI">
+  <component name="RunManager">
     <configuration name="ArticleCategorizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.ArticleCategorizer" />
       <module name="News_recommendation" />
@@ -204,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730896086670</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve.">
+      <option name="closed" value="true" />
+      <created>1731785237091</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731785237091</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +220,7 @@
     <MESSAGE value="creation of article fxml" />
     <MESSAGE value="ammending of path to json file containing article dataset" />
     <MESSAGE value="encapsulate json reading functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="encapsulate json reading functionality" />
+    <MESSAGE value="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve." />
+    <option name="LAST_COMMIT_MESSAGE" value="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve." />
   </component>
 </project>

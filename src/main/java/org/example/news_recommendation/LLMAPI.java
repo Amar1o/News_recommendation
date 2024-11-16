@@ -19,16 +19,15 @@ public class LLMAPI {
         this.client = HttpClient.newHttpClient(); // Initialize HttpClient
     }
     public String createRequestBody(String newsDescription) {
-        return String.format("""
-                {
-                    "model": "llama3-8b-8192",
-                    "messages": [
-                        {
-                            "role": "user",
-                            "content": "Analyze this news article and determine its category: Business, Technology, Politics, Entertainment, Sports, Health, Science, or World News. Respond in JSON format with category and confidence only in one word."
-                        }
-                    ]
-                }""", newsDescription.replace("\"", "\\\""));
+        return "{\n" +
+                "    \"model\": \"llama3-8b-8192\",\n" +
+                "    \"messages\": [\n" +
+                "        {\n" +
+                "            \"role\": \"user\",\n" +
+                "            \"content\": \"Analyze this news article and determine its category: Business, Technology, Politics, Entertainment, Sports, Health, Science, or World News. Respond in JSON format with category and confidence only in one word. " + newsDescription.replace("\"", "\\\"") + "\"\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
     }
 
 
