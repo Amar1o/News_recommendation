@@ -53,6 +53,11 @@
       <artifactId>jsoup</artifactId>
       <version>1.15.3</version>
     </dependency>
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>org.json</artifactId>
+          <version>chargebee-1.0</version>
+      </dependency>
     <dependency>
       <groupId>edu.stanford.nlp</groupId>
       <artifactId>stanford-corenlp</artifactId>

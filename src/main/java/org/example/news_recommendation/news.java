@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import java.io.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import org.json.JSONException;
+
 import java.io.IOException;
 
 public class news {
@@ -46,7 +48,7 @@ public class news {
             content.setText("Unable to load articles. Please check the file format and content.");
         }
     }
-    private void displayArticle ( int index){
+    private void displayArticle ( int index) throws JSONException {
         if (articles != null && index >= 0 && index < articles.size()) {
             JsonObject article = articles.get(index).getAsJsonObject();
 
@@ -56,27 +58,35 @@ public class news {
             } else {
                 title.setText("Title not available");
             }
-
+            String articlecontent="";
             // Check for content field and handle JsonNull
             if (article.has("short_description") && !article.get("short_description").isJsonNull()) {
                 content.setText(article.get("short_description").getAsString());
+            articlecontent=article.get("short_description").getAsString();
             } else {
                 content.setText("Content not available");
             }
+            LLMAPI llmAPI = new LLMAPI();
+            String requestBody = llmAPI.createRequestBody(articlecontent);
+            String apiResponse = llmAPI.sendingRequest(requestBody);
 
+            // Extract the predicted genre from the API response
+            String genre = llmAPI.recieverequest(apiResponse);
+
+            System.out.println(genre);
             currentIndex = index;
         }
     }
 
 
-    public void showNextArticle () {
+    public void showNextArticle () throws JSONException {
         if (currentIndex < articles.size() - 1) {
             displayArticle(currentIndex + 1);
         }
     }
 
 
-    public void showPreviousArticle () {
+    public void showPreviousArticle () throws JSONException {
         if (currentIndex > 0) {
             displayArticle(currentIndex - 1);
         }

@@ -4,6 +4,8 @@ module org.example.news_recommendation {
     requires java.sql;
     requires com.google.gson;
     requires stanford.corenlp;
+    requires org.json.chargebee;
+    requires java.net.http;
 
 
     opens org.example.news_recommendation to javafx.fxml;
