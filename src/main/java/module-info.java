@@ -6,6 +6,7 @@ module org.example.news_recommendation {
     requires stanford.corenlp;
     requires org.json.chargebee;
     requires java.net.http;
+    requires javafx.web;
 
 
     opens org.example.news_recommendation to javafx.fxml;

@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve.">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" afterDir="false" />
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="removed stanford article categorizer">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,7 +212,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731785237091</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="changed the json format so it dynamically includes the article description">
+      <option name="closed" value="true" />
+      <created>1731788392716</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731788392716</updated>
+    </task>
+    <task id="LOCAL-00010" summary="removed stanford article categorizer">
+      <option name="closed" value="true" />
+      <created>1731788482291</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731788482291</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,6 +241,8 @@
     <MESSAGE value="ammending of path to json file containing article dataset" />
     <MESSAGE value="encapsulate json reading functionality" />
     <MESSAGE value="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve." />
-    <option name="LAST_COMMIT_MESSAGE" value="Opted to use an api LLM known as groq. Implemented class to parse json requests and recieve." />
+    <MESSAGE value="changed the json format so it dynamically includes the article description" />
+    <MESSAGE value="removed stanford article categorizer" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed stanford article categorizer" />
   </component>
 </project>
