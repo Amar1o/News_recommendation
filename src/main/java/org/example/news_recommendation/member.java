@@ -7,11 +7,10 @@ package org.example.news_recommendation;
         private static String preference;
 
         // Constructor
-        public member(String firstName, String lastName, int age, String preference) {
+        public member(String firstName, String lastName) {
             this.firstName = firstName;
             this.lastName = lastName;
-            this.age = age;
-            this.preference = preference;
+
         }
 
         // Getters
@@ -23,11 +22,5 @@ package org.example.news_recommendation;
             return lastName;
         }
 
-        public int getAge() {
-            return age;
-        }
 
-        public static String getPreference() {
-            return preference;
-        }
 }
