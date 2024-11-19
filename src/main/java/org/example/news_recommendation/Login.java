@@ -94,11 +94,20 @@ public class Login {
             Stage stage = (Stage) submit.getScene().getWindow();
 
             // Set the new scene (news scene)
-            stage.setScene(new Scene(root, 600, 400)); // Adjust width and height as needed
+            //stage.setScene(new Scene(root, 600, 400)); // Adjust width and height as needed
             stage.setTitle("Articles");
 
-            // Show the stage (already visible, but this ensures the new scene is displayed)
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            //stage.setTitle("NEWS");
+
+            stage.sizeToScene();
             stage.show();
+
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Failed to load news.fxml.");

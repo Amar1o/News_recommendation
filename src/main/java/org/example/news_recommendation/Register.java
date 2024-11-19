@@ -38,7 +38,7 @@ public class Register {
     }
 
 
-    public static int register(String firstname, String lastName, int Age, String Preference) throws SQLException, ClassNotFoundException {
+    public static int register(String firstname, String lastName) throws SQLException, ClassNotFoundException {
         String url = "jdbc:mysql://localhost:3306/truy";
         String username = "root";
         String password = "";
@@ -62,12 +62,11 @@ public class Register {
                         return 1;
                     } else {
                         System.out.println("Registering new user...");
-                        String insrtSQL = "INSERT INTO members (first_name, last_name, age, preference) VALUES (?, ?, ?, ?)";
+                        String insrtSQL = "INSERT INTO members (first_name, last_name ) VALUES (?, ?)";
                         try (PreparedStatement insertStmt = connection.prepareStatement(insrtSQL)) {
                             insertStmt.setString(1, firstname);
                             insertStmt.setString(2, lastName);
-                            insertStmt.setInt(3, Age);
-                            insertStmt.setString(4, Preference);
+
 
                             // Execute the insert statement
                             int rowsAffected = insertStmt.executeUpdate();
@@ -98,13 +97,12 @@ public class Register {
 
         String fname = firstname.getText();
         String lname = lastname.getText();
-        int age = Integer.parseInt(Age.getText());
-        String pref = Preference.getText();
 
-        int result = register(fname, lname, age, pref);
+
+        int result = register(fname, lname);
         switch (result) {
             case 0:
-                registeredMember = new member(fname, lname, age, pref); // Store registered member
+                registeredMember = new member(fname, lname); // Store registered member
                 clearTextFields();
                 success.setVisible(true);
                 success.setText("Member successfully registered!");

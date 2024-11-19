@@ -24,7 +24,7 @@ public class LLMAPI {
                 "    \"messages\": [\n" +
                 "        {\n" +
                 "            \"role\": \"user\",\n" +
-                "            \"content\": \"Analyze this news article and determine its category: Business, Technology, Politics, Entertainment, Sports, Health, Science, or World News. Respond in JSON format with category and confidence only in one word. " + newsDescription.replace("\"", "\\\"") + "\"\n" +
+                "            \"content\": \"Analyze this news article and determine its category: Business, Technology, Politics, Entertainment, Sports, Health, Science, or World News. Respond in JSON format with category and confidence only in one word." + newsDescription.replace("\"", "\\\"") + "\"\n" +
                 "        }\n" +
                 "    ]\n" +
                 "}";
