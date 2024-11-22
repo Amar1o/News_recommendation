@@ -22,12 +22,17 @@ public class Login {
     private Text success;
 
     @FXML
-    private TextField firstname;
+    public TextField firstname;
+
 
     @FXML
-    private TextField lastname;
+    public TextField lastname;
 
-    public int validate(String first, String lastName) {
+
+
+
+
+    public int validate(String firstName, String lastName) {
         String url = "jdbc:mysql://localhost:3306/truy";
         String sql = "SELECT * FROM members WHERE first_name = ? AND last_name = ?";
         String username = "root";
@@ -42,12 +47,12 @@ public class Login {
                     System.out.println("Connected to the database!");
                 }
 
-                pre.setString(1, first);
+                pre.setString(1, firstName);
                 pre.setString(2, lastName);
 
                 try (ResultSet rs = pre.executeQuery()) {
                     if (rs.next()) {
-                        System.out.println("Login successful! Welcome, " + first + "!");
+                        System.out.println("Login successful! Welcome, " + firstName + "!");
                         return 1;
                     } else {
                         System.out.println("Invalid first name or last name.");
@@ -66,6 +71,7 @@ public class Login {
             return 0;
         }
     }
+
 
     @FXML
     public void register() {
@@ -86,22 +92,18 @@ public class Login {
     }
     private void switchtoarticle() {
         try {
-            // Load the news.fxml file
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Article.fxml"));
             Parent root = loader.load();
 
-            // Get the current stage (window)
+
             Stage stage = (Stage) submit.getScene().getWindow();
 
-            // Set the new scene (news scene)
-            //stage.setScene(new Scene(root, 600, 400)); // Adjust width and height as needed
+
             stage.setTitle("Articles");
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
-
-            //stage.setTitle("NEWS");
-
             stage.sizeToScene();
             stage.show();
 
@@ -113,19 +115,17 @@ public class Login {
             System.err.println("Failed to load news.fxml.");
         }
     }
+
     @FXML
     public void submit() {
         String inputFirstName = firstname.getText();
         String inputLastName = lastname.getText();
-
         int result = validate(inputFirstName, inputLastName);
-
         if (result == 1) {
             success.setText("Login successful! Welcome, " + inputFirstName + "!");
             success.setVisible(true);
             switchtoarticle();
-
-
+            User.getInstance().setUserDetails(inputFirstName, inputLastName);
         } else if (result == 2) {
             success.setText("Invalid first name or last name.");
             success.setVisible(true);
