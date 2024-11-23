@@ -112,7 +112,7 @@ public class Login {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Failed to load news.fxml.");
+            System.err.println("Failed to load Article.fxml.");
         }
     }
 

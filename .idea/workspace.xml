@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="integrated webview element in scene for viewing ease">
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" afterDir="false" />
@@ -20,12 +20,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Amar1o &lt;msm.amarali.03@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="Bertmodel" />
@@ -55,6 +60,8 @@
     &quot;Application.LLMAPI.executor&quot;: &quot;Run&quot;,
     &quot;Application.Recomender.executor&quot;: &quot;Run&quot;,
     &quot;Application.Start.executor&quot;: &quot;Run&quot;,
+    &quot;Application.member.executor&quot;: &quot;Run&quot;,
+    &quot;Application.recommendation.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -75,33 +82,7 @@
       <recent name="E:\progam\News_recommendation\src\main\java\org\example\news_recommendation" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="ArticleCategorizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.ArticleCategorizer" />
-      <module name="News_recommendation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.news_recommendation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BertModelExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.BertModelExample" />
-      <module name="News_recommendation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.news_recommendation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.cldbert">
     <configuration name="LLMAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.LLMAPI" />
       <module name="News_recommendation" />
@@ -141,13 +122,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="member" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.member" />
+      <module name="News_recommendation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.news_recommendation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="recommendation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.recommendation" />
+      <module name="News_recommendation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.news_recommendation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Recomender" />
         <item itemvalue="Application.LLMAPI" />
+        <item itemvalue="Application.recommendation" />
+        <item itemvalue="Application.member" />
+        <item itemvalue="Application.Recomender" />
         <item itemvalue="Application.cldbert" />
-        <item itemvalue="Application.BertModelExample" />
-        <item itemvalue="Application.ArticleCategorizer" />
       </list>
     </recent_temporary>
   </component>
@@ -163,7 +170,9 @@
       <workItem from="1730892780887" duration="2823000" />
       <workItem from="1730988231521" duration="1368000" />
       <workItem from="1731329462965" duration="4179000" />
-      <workItem from="1732048610629" duration="4044000" />
+      <workItem from="1732048610629" duration="11514000" />
+      <workItem from="1732261055411" duration="5484000" />
+      <workItem from="1732271208489" duration="24573000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -253,7 +262,31 @@
       <option name="project" value="LOCAL" />
       <updated>1731790608308</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="modified news class so that methods are relatively separated from javafx. Included Favourite article feature">
+      <option name="closed" value="true" />
+      <created>1732054167774</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732054167774</updated>
+    </task>
+    <task id="LOCAL-00013" summary="modified news class so that methods are relatively separated from javafx. Included Favourite article feature. Also redesigned database structure and queries">
+      <option name="closed" value="true" />
+      <created>1732054300701</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732054300701</updated>
+    </task>
+    <task id="LOCAL-00014" summary="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles.">
+      <option name="closed" value="true" />
+      <created>1732279671368</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1732279671368</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,6 +302,9 @@
     <MESSAGE value="changed the json format so it dynamically includes the article description" />
     <MESSAGE value="removed stanford article categorizer" />
     <MESSAGE value="integrated webview element in scene for viewing ease" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrated webview element in scene for viewing ease" />
+    <MESSAGE value="modified news class so that methods are relatively separated from javafx. Included Favourite article feature" />
+    <MESSAGE value="modified news class so that methods are relatively separated from javafx. Included Favourite article feature. Also redesigned database structure and queries" />
+    <MESSAGE value="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles." />
+    <option name="LAST_COMMIT_MESSAGE" value="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles." />
   </component>
 </project>

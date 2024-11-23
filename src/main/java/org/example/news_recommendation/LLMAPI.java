@@ -11,7 +11,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 public class LLMAPI {
     private String apiKey= "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";
     private HttpClient client;
@@ -20,23 +21,40 @@ public class LLMAPI {
     public LLMAPI() {
         this.client = HttpClient.newHttpClient(); // Initialize HttpClient
     }
-    public String createRequestBody(String newsDescription) {
-        return "{\n" +
-                "    \"model\": \"llama3-8b-8192\",\n" +
-                "    \"messages\": [\n" +
-                "        {\n" +
-                "            \"role\": \"user\",\n" +
-                "            \"content\": \"Analyze this news article and determine its category: " +
-                "LATINO VOICES, MONEY, STYLE & BEAUTY, WORLDPOST, CRIME, U.S. NEWS, ENVIRONMENT, COMEDY, TASTE, BUSINESS, EDUCATION, SPORTS, " +
-                "FIFTY, QUEER VOICES, COLLEGE, MEDIA, SCIENCE, HEALTHY LIVING, THE WORLDPOST, BLACK VOICES, WEDDINGS, GOOD NEWS, ENTERTAINMENT, " +
-                "TRAVEL, HOME & LIVING, PARENTING, POLITICS, PARENTS, STYLE, CULTURE & ARTS, WEIRD NEWS, DIVORCE, GREEN, ARTS, TECH, WOMEN, IMPACT, " +
-                "FOOD & DRINK, RELIGION, ARTS & CULTURE, WELLNESS, WORLD NEWS. " +
-                "Respond with category only in one word:  " +
-                newsDescription.replace("\"", "\\\"") + "\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}";
-    }
+//    public String createRequestBody(String newsDescription) {
+//        return "{\n" +
+//                "    \"model\": \"llama3-8b-8192\",\n" +
+//                "    \"messages\": [\n" +
+//                "        {\n" +
+//                "            \"role\": \"user\",\n" +
+//                "            \"content\": \"Analyze this news article and determine its category: " +
+//                "LATINO VOICES, MONEY, STYLE & BEAUTY, WORLDPOST, CRIME, U.S. NEWS, ENVIRONMENT, COMEDY, TASTE, BUSINESS, EDUCATION, SPORTS, " +
+//                "FIFTY, QUEER VOICES, COLLEGE, MEDIA, SCIENCE, HEALTHY LIVING, THE WORLDPOST, BLACK VOICES, WEDDINGS, GOOD NEWS, ENTERTAINMENT, " +
+//                "TRAVEL, HOME & LIVING, PARENTING, POLITICS, PARENTS, STYLE, CULTURE & ARTS, WEIRD NEWS, DIVORCE, GREEN, ARTS, TECH, WOMEN, IMPACT, " +
+//                "FOOD & DRINK, RELIGION, ARTS & CULTURE, WELLNESS, WORLD NEWS. " +
+//                "Respond with category only in one word:  " +
+//                newsDescription.replace("\"", "\\\"") + "\"\n" +
+//                "        }\n" +
+//                "    ]\n" +
+//                "}";
+//    }
+public String createRequestBody(String newsDescription) {
+    return "{\n" +
+            "    \"model\": \"llama3-8b-8192\",\n" +
+            "    \"messages\": [\n" +
+            "        {\n" +
+            "            \"role\": \"user\",\n" +
+            "            \"content\": \"Analyze this news article and determine its category: " +
+            "POLITICS, WELLNESS, ENTERTAINMENT, TRAVEL, STYLE & BEAUTY, PARENTING, " +
+            "HEALTHY LIVING, QUEER VOICES, FOOD & DRINK, BUSINESS, COMEDY, SPORTS, " +
+            "BLACK VOICES, HOME & LIVING, PARENTS. " +
+            "Respond with category only in one word:  " +
+            newsDescription.replace("\"", "\\\"") + "\"\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}";
+}
+
 
 
     public String generaterecommend(String genre) {
@@ -88,8 +106,8 @@ public class LLMAPI {
         return content;
     }
 
-    public static List<String> extractedprobabilities(String apiResponse) {
-        List<String> categoriesWithProbabilities = new ArrayList<>();
+    public static Map<String, Double> extractedProbabilities(String apiResponse) {
+        Map<String, Double> categoriesWithProbabilities = new HashMap<>();
 
         try {
             // Parse the API response
@@ -108,8 +126,8 @@ public class LLMAPI {
                     String category = categoryObject.getString("category");
                     double probability = categoryObject.getDouble("probability");
 
-                    // Add category and probability to the list
-                    categoriesWithProbabilities.add(category + ": " + probability);
+                    // Add category and probability to the map
+                    categoriesWithProbabilities.put(category, probability);
                 }
             }
         } catch (Exception e) {
@@ -133,12 +151,12 @@ public class LLMAPI {
         System.out.println("API Response: \n" + response);
 
 
-        List<String> result = extractedprobabilities(response);
-
-        // Print the result
-        for (String item : result) {
-            System.out.println(item);
-        }
+        //List<String> result = extractedprobabilities(response);
+//
+//        // Print the result
+//        for (String item : result) {
+//            System.out.println(item);
+//        }
         // Attempt to extract and print the category from the response
 //        try {
 //            String category = api.recieverequest(response);

@@ -26,9 +26,6 @@ public class Register {
 
     @FXML
     private TextField result;
-    private member registeredMember;
-
-
 
     private void clearTextFields() {
         firstname.clear();
@@ -102,11 +99,10 @@ public class Register {
         int result = register(fname, lname);
         switch (result) {
             case 0:
-                registeredMember = new member(fname, lname); // Store registered member
                 clearTextFields();
                 success.setVisible(true);
                 success.setText("Member successfully registered!");
-                System.out.println("Registered Member: " + registeredMember);
+                //System.out.println("Registered Member: " + registeredMember);
                 break;
             case 1:
                 clearTextFields();

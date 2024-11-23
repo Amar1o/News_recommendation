@@ -1,14 +1,22 @@
 package org.example.news_recommendation;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import org.json.JSONException;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.sql.*;
 
 public class news {
@@ -18,6 +26,8 @@ public class news {
 
     private WebEngine eng;
 
+    @FXML
+    private Button submit;
 
     @FXML
     private TextArea title;
@@ -253,6 +263,28 @@ private JsonArray filtered;
 
         return -1; // Default case (unexpected error)
     }
+    @FXML
+    private void switchtorecommended(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("personalizedarticles.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window)
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene on the stage
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Personalized Articles");
+            stage.sizeToScene();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load personalizedarticles.fxml.");
+        }
+    }
+
+
 
 
     public void showNextArticle() throws JSONException {
