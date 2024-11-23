@@ -21,6 +21,8 @@ public class LLMAPI {
     public LLMAPI() {
         this.client = HttpClient.newHttpClient(); // Initialize HttpClient
     }
+
+
 //    public String createRequestBody(String newsDescription) {
 //        return "{\n" +
 //                "    \"model\": \"llama3-8b-8192\",\n" +

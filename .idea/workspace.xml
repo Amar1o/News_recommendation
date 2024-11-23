@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,6 +168,7 @@
       <workItem from="1732048610629" duration="11514000" />
       <workItem from="1732261055411" duration="5484000" />
       <workItem from="1732271208489" duration="24573000" />
+      <workItem from="1732350071344" duration="519000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -286,7 +282,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732279671368</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml">
+      <option name="closed" value="true" />
+      <created>1732350544911</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732350544911</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +309,7 @@
     <MESSAGE value="modified news class so that methods are relatively separated from javafx. Included Favourite article feature" />
     <MESSAGE value="modified news class so that methods are relatively separated from javafx. Included Favourite article feature. Also redesigned database structure and queries" />
     <MESSAGE value="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles." />
-    <option name="LAST_COMMIT_MESSAGE" value="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles." />
+    <MESSAGE value="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml" />
+    <option name="LAST_COMMIT_MESSAGE" value="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml" />
   </component>
 </project>
