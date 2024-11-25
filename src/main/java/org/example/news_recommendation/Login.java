@@ -1,12 +1,14 @@
 package org.example.news_recommendation;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -26,21 +28,18 @@ public class Login {
 
 
     @FXML
-    public TextField lastname;
+    public TextField Password;
 
 
-
-
-
-    public int validate(String firstName, String lastName) {
-        String url = "jdbc:mysql://localhost:3306/truy";
-        String sql = "SELECT * FROM members WHERE first_name = ? AND last_name = ?";
+    public static int validate(String firstName, String Password) {
+        String url = "jdbc:mysql://localhost:3306/news";
+        String sql = "SELECT * FROM members WHERE first_name = ? AND password = ?";
         String username = "root";
         String password = "";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Ensure MySQL driver is loaded
 
-            try (Connection connection = DriverManager.getConnection(url,username, password);
+            try (Connection connection = DriverManager.getConnection(url, username, password);
                  PreparedStatement pre = connection.prepareStatement(sql)) {
 
                 if (connection != null) {
@@ -48,7 +47,7 @@ public class Login {
                 }
 
                 pre.setString(1, firstName);
-                pre.setString(2, lastName);
+                pre.setString(2, Password);
 
                 try (ResultSet rs = pre.executeQuery()) {
                     if (rs.next()) {
@@ -72,68 +71,95 @@ public class Login {
         }
     }
 
+    public void openNewWindow() {
+        // Create new window in a new thread
+        Thread windowThread = new Thread(() -> {
+            Platform.runLater(() -> {
+                try {
+                    // Create new stage (window)
+                    Stage newStage = new Stage();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+                    Parent root = loader.load();
 
-    @FXML
-    public void register() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) submit.getScene().getWindow();
-
-            stage.setScene(new Scene(root, 1000, 1000));
-            stage.setTitle("Register");
-
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Failed to load Register.fxml.");
-        }
-    }
-    private void switchtoarticle() {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Article.fxml"));
-            Parent root = loader.load();
+                    // Create scene
+                    Scene scene = new Scene(root);
+                    newStage.setScene(scene);
+                    newStage.setTitle("NEWS");
 
 
-            Stage stage = (Stage) submit.getScene().getWindow();
-
-
-            stage.setTitle("Articles");
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.sizeToScene();
-            stage.show();
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Failed to load Article.fxml.");
-        }
+                    newStage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+        windowThread.start();
     }
 
-    @FXML
-    public void submit() {
-        String inputFirstName = firstname.getText();
-        String inputLastName = lastname.getText();
-        int result = validate(inputFirstName, inputLastName);
-        if (result == 1) {
-            success.setText("Login successful! Welcome, " + inputFirstName + "!");
-            success.setVisible(true);
-            switchtoarticle();
-            User.getInstance().setUserDetails(inputFirstName, inputLastName);
-        } else if (result == 2) {
-            success.setText("Invalid first name or last name.");
-            success.setVisible(true);
-        } else {
-            success.setText("An error occurred during validation.");
-            success.setVisible(true);
-        }
+//    @FXML
+//    public void register() {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("Register.fxml"));
+//            Parent root = loader.load();
+//
+//            Stage stage = (Stage) submit.getScene().getWindow();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.sizeToScene();
+//            stage.show();
+//            stage.setTitle("Register");
+//
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to load Register.fxml.");
+//        }
+//    }
+//    private void switchtoarticle() {
+//        try {
+//
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("Article.fxml"));
+//            Parent root = loader.load();
+//
+//
+//            Stage stage = (Stage) submit.getScene().getWindow();
+//
+//
+//            stage.setTitle("Articles");
+//
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.sizeToScene();
+//            stage.show();
+//
+//
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to load Article.fxml.");
+//        }
+//    }
+//
+//    @FXML
+//    public void submit() {
+//        String inputFirstName = firstname.getText();
+//        String inputpassword = Password.getText();
+//        int result = validate(inputFirstName, inputpassword);
+//        if (result == 1) {
+//            success.setText("Login successful! Welcome, " + inputFirstName + "!");
+//            success.setVisible(true);
+//            switchtoarticle();
+//            User.getInstance().setUserDetails(inputFirstName, inputpassword);
+//        } else if (result == 2) {
+//            success.setText("Invalid first name or last name.");
+//            success.setVisible(true);
+//        } else {
+//            success.setText("An error occurred during validation.");
+//            success.setVisible(true);
+//        }
+//
+//    }
+//}
 
-    }
 }
-

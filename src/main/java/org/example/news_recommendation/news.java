@@ -1,6 +1,8 @@
 package org.example.news_recommendation;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import javafx.application.Platform;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,96 +20,119 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class news {
 
     @FXML
-    private WebView web;
+    private static WebView web;
 
-    private WebEngine eng;
+    private static WebEngine eng;
 
     @FXML
     private Button submit;
 
     @FXML
-    private TextArea title;
+    private  TextArea title;
 
     @FXML
-    private TextArea content;
+    private  TextArea content;
     @FXML
     private Button prev;
     @FXML
     private Button forward;
-    private JsonArray articles; // Holds all articles received from the API
-    private int currentIndex = 0; // Keeps track of the currently displayed article
-private JsonArray filtered;
+    private static JsonArray articles; // Holds all articles received from the API
+    private static int currentIndex = 0; // Keeps track of the currently displayed article
+private static JsonArray filtered;
 
-    private String genre;
-    private String headline;
-    private String URL;
+    private static String genre;
+    private static String headline;
+    private static String URL;
 
     private String name;
-    private String articlecontent = "";
+    private static String articlecontent = "";
+    private ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private static CompletableFuture<Void> webLoadingFuture;
+    private static ExecutorService webExecutor = Executors.newSingleThreadExecutor();
 
-    public void Webarticles(String url) {
-        eng = web.getEngine();
-        String disablevideo = "document.querySelectorAll('video, audio').forEach(function(media) { media.autoplay = false; });";
 
-        String disableImages = "document.querySelectorAll('img').forEach(function(img) { img.style.display = 'none'; });";
-        eng.executeScript(disableImages);
-        eng.executeScript(disablevideo);
-        eng.load(url);
-        setzoom(1.0);
+
+    public static void Webarticles(String url) {
+        // If already loading this URL, don't start again
+        if (webLoadingFuture != null && !webLoadingFuture.isDone()) {
+            return;
+        }
+
+        webLoadingFuture = CompletableFuture.runAsync(() -> {
+            Platform.runLater(() -> {
+                if (eng == null) {
+                    eng = web.getEngine();
+                }
+
+                String disablevideo = "document.querySelectorAll('video, audio').forEach(function(media) { media.autoplay = false; });";
+                String disableImages = "document.querySelectorAll('img').forEach(function(img) { img.style.display = 'none'; });";
+
+                eng.load(url);
+
+                // Wait for page load to complete before running scripts
+                eng.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
+                    if (newState == Worker.State.SUCCEEDED) {
+                        eng.executeScript(disableImages);
+                        eng.executeScript(disablevideo);
+                        setzoom(1.0);
+                    }
+                });
+            });
+        }, webExecutor);
     }
 
-    private void setzoom(double zoomFactor) {
+
+    private static void setzoom(double zoomFactor) {
         String zoomScript = "document.body.style.zoom = '" + zoomFactor + "';";
         eng.executeScript(zoomScript);
     }
 
     public static JsonArray checkifliked(JsonArray articles) {
-        String url = "jdbc:mysql://localhost:3306/truy";
-        String username = "root";
-        String password = "";
-
-        String query = "SELECT headline FROM preference WHERE name = ? AND headline = ?";
-
-        String name = User.getInstance().getFirstName();
-        JsonArray filteredArticles = new JsonArray();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        CompletableFuture<JsonArray> future = CompletableFuture.supplyAsync(() -> {
+            String url = "jdbc:mysql://localhost:3306/news";
+            String username = "root";
+            String password = "";
+            String query = "SELECT headline FROM preference WHERE name = ? AND headline = ?";
+            String name = User.getInstance().getFirstName();
+            JsonArray filteredArticles = new JsonArray();
 
             try (Connection connection = DriverManager.getConnection(url, username, password);
                  PreparedStatement statement = connection.prepareStatement(query)) {
 
-                // Iterate through each article in the input JsonArray
                 for (int i = 0; i < articles.size(); i++) {
-                    JsonObject article = articles.get(i).getAsJsonObject(); // Get each article as JsonObject
-                    String headline = article.get("headline").getAsString(); // Get headline from JsonObject
+                    JsonObject article = articles.get(i).getAsJsonObject();
+                    String headline = article.get("headline").getAsString();
 
                     statement.setString(1, name);
                     statement.setString(2, headline);
 
                     try (ResultSet rs = statement.executeQuery()) {
-                        if (!rs.next()) { // If the article is not liked by the user
-                            filteredArticles.add(article); // Add to filtered articles
+                        if (!rs.next()) {
+                            filteredArticles.add(article);
                         }
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            return filteredArticles;
+        });
 
-        } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBC Driver not found.");
+        try {
+            return future.get(); // Wait for the result
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            System.err.println("SQL error: " + e.getMessage());
-            e.printStackTrace();
+            return new JsonArray();
         }
-
-        return filteredArticles; // Return the final filtered JsonArray
     }
-    public int loadarticlesController(String filepath) {
+    public static int loadarticlesController(String filepath) {
         try {
             jsonreader jsonArticleReader = new jsonreader(filepath);
             articles = jsonArticleReader.readFile(); // Fetch articles from the JSON file
@@ -124,55 +149,48 @@ private JsonArray filtered;
             throw new RuntimeException(e);
         }
     }
-
-    @FXML
-    public void loadArticlesbutton() throws JSONException {
-        String filePath = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
-        int status = loadarticlesController(filePath);
-        if (status == 0) {
-            displayArticle(0); // Display the first article
-        } else if (status == 1) {
-            title.setText("No articles found.");
-            content.setText("");
-        } else {
-            title.setText("Error fetching articles.");
-            content.setText("Unable to load articles. Please check the file format and content.");
-        }
+    public JsonArray getArticles(){
+        return filtered;
     }
 
-    private void displayArticle(int index) throws JSONException {
+
+    public  void displayArticle(int index) throws JSONException {
         if (filtered != null && index >= 0 && index < filtered.size()) {
             JsonObject article = filtered.get(index).getAsJsonObject();
 
+
             // Check for title field and handle JsonNull
             if (article.has("headline") && !article.get("headline").isJsonNull()) {
-                title.setText(article.get("headline").getAsString());
-                headline = article.get("headline").getAsString();
-            } else {
-                title.setText("Title not available");
-            }
-
-
-            // Check for content field and handle JsonNull
-            if (article.has("short_description") && !article.get("short_description").isJsonNull()) {
-                content.setText(article.get("short_description").getAsString());
+//                this.content.setText(article.get("short_description").getAsString());
                 URL = article.get("link").getAsString();
+
+//                this.title.setText(article.get("headline").getAsString());
+                headline = article.get("headline").getAsString();
                 articlecontent = article.get("short_description").getAsString();
             } else {
-                content.setText("Content not available");
+                this.title.setText("Title not available");
             }
-
             genre = LLM(articlecontent);
-            // Webarticles(URL);
             System.out.println(genre);
+            System.out.println(headline);
             currentIndex = index;
-
-
         }
     }
+public static String getURL(){
+        return  URL;
+}
+    public static String gettitle() {
 
+        return headline;
+    }
+    public String getcontent(){
+        return articlecontent;
+    }
+public static String getgenre(){
+        return genre;
+}
 
-    public String LLM(String articlecontent) throws JSONException {
+    public static String LLM(String articlecontent) throws JSONException {
         LLMAPI llmAPI = new LLMAPI();
         String requestBody = llmAPI.createRequestBody(articlecontent);
         String apiResponse = llmAPI.sendingRequest(requestBody);
@@ -183,26 +201,10 @@ private JsonArray filtered;
 
 
 
-    public void viewarticles() {
-        if (URL != null && !URL.isEmpty()) {
-            Webarticles(URL);
-        } else {
-            System.out.println("No valid URL to display.");
-        }
-    }
 
-    public void favarticle() throws ClassNotFoundException {
-        if (headline != null && genre != null && URL != null) {
-            name = User.getInstance().getFirstName();
-            AddtoDB(name,headline,genre,URL);
-            System.out.println("Article added to favorites: " + headline);
-        } else {
-            System.out.println("No valid article to add to favorites.");
-        }
-    }
 
-    public int AddtoDB(String name, String headline, String genre, String URL) throws ClassNotFoundException {
-        String url = "jdbc:mysql://localhost:3306/truy";
+    public static int AddtoDB(String name, String headline, String genre, String URL) throws ClassNotFoundException {
+        String url = "jdbc:mysql://localhost:3306/news";
         String username = "root";
         String password = "";
 
@@ -263,41 +265,5 @@ private JsonArray filtered;
 
         return -1; // Default case (unexpected error)
     }
-    @FXML
-    private void switchtorecommended(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("personalizedarticles.fxml"));
-            Parent root = loader.load();
 
-            // Get the current stage (window)
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Set the new scene on the stage
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Personalized Articles");
-            stage.sizeToScene();
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Failed to load personalizedarticles.fxml.");
-        }
-    }
-
-
-
-
-    public void showNextArticle() throws JSONException {
-        if (currentIndex < articles.size() - 1) {
-            displayArticle(currentIndex + 1);
-
-        }
-    }
-
-
-    public void showPreviousArticle() throws JSONException {
-        if (currentIndex > 0) {
-            displayArticle(currentIndex - 1);
-        }
-    }
 }

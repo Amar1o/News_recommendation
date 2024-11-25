@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="button" prefHeight="502.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.news_recommendation.news">
+<AnchorPane fx:id="button" prefHeight="502.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.news_recommendation.newsController">
     <children>
         <Button fx:id="prev" layoutX="49.0" layoutY="405.0" mnemonicParsing="false" onAction="#showPreviousArticle" text="Previous" />
         <Button fx:id="forward" layoutX="221.0" layoutY="405.0" mnemonicParsing="false" onAction="#showNextArticle" text="Forward" />

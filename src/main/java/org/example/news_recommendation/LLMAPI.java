@@ -138,35 +138,34 @@ public String createRequestBody(String newsDescription) {
 
         return categoriesWithProbabilities;
     }
-    public static void main(String[] args) {
-        // Create an instance of the LLMAPI class
-        LLMAPI api = new LLMAPI();
-        String sampleNewsDescription = "The recent advancements in AI and machine learning are revolutionizing industries, making processes more efficient and creating new opportunities for businesses.";
-        String genreo = "HEALTH,HEALTH,TECH,WORLD NEWS, MEDIA";
-
-       // String requestBody = api.createRequestBody(sampleNewsDescription);
-
-        String requestBody= api.generaterecommend(genreo);
-
-        // Send the request and get the response
-        String response = api.sendingRequest(requestBody);
-        System.out.println("API Response: \n" + response);
-
-
-        //List<String> result = extractedprobabilities(response);
+//    public static void main(String[] args) {
+//        // Create an instance of the LLMAPI class
+//        LLMAPI api = new LLMAPI();
+//        String sampleNewsDescription = "The recent advancements in AI and machine learning are revolutionizing industries, making processes more efficient and creating new opportunities for businesses.";
+//        String genreo = "HEALTH,HEALTH,TECH,WORLD NEWS, MEDIA";
 //
-//        // Print the result
-//        for (String item : result) {
-//            System.out.println(item);
-//        }
-        // Attempt to extract and print the category from the response
-//        try {
-//            String category = api.recieverequest(response);
-//            System.out.println("Category: " + category);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//       // String requestBody = api.createRequestBody(sampleNewsDescription);
+//
+//        String requestBody= api.generaterecommend(genreo);
+//
+//        // Send the request and get the response
+//        String response = api.sendingRequest(requestBody);
+//        System.out.println("API Response: \n" + response);
+//
+//
+//        //List<String> result = extractedprobabilities(response);
+////
+////        // Print the result
+////        for (String item : result) {
+////            System.out.println(item);
+////        }
+//        // Attempt to extract and print the category from the response
+////        try {
+////            String category = api.recieverequest(response);
+////            System.out.println("Category: " + category);
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        }
     }
 
 
-}

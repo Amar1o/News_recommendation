@@ -6,20 +6,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.news_recommendation.Login">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.news_recommendation.LoginController">
     <children>
         <TitledPane animated="false" layoutX="-1.0" prefHeight="400.0" prefWidth="600.0" text="untitled">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
                         <TextField fx:id="firstname" layoutX="216.0" layoutY="144.0" />
-                        <TextField fx:id="lastname" layoutX="216.0" layoutY="201.0" />
+                        <TextField fx:id="Password" layoutX="216.0" layoutY="201.0" />
                         <Text layoutX="268.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" />
                         <Text layoutX="83.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Firstname" />
-                        <Text layoutX="83.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lastname" />
+                        <Text layoutX="83.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
                         <Button fx:id="submit" layoutX="257.0" layoutY="259.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
-                        <Text fx:id="success" layoutX="262.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="success" />
+                        <Text fx:id="success" layoutX="262.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="success" visible="false" />
                         <Button fx:id="register" layoutX="256.0" layoutY="72.0" mnemonicParsing="false" onAction="#register" text="Register" />
+                  <Button fx:id="ww" layoutX="462.0" layoutY="72.0" mnemonicParsing="false" onAction="#openNewWindow" text="New window" />
                     </children>
                 </AnchorPane>
             </content>

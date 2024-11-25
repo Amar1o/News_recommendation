@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml">
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="modifying Register.fxml for proper user interface flow">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_11_2024_22_48_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_11_2024_22_48__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Start.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/recommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/recommendation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Register.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/personalizedarticles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/personalizedarticles.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -77,7 +89,7 @@
       <recent name="E:\progam\News_recommendation\src\main\java\org\example\news_recommendation" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.cldbert">
+  <component name="RunManager" selected="Application.Start">
     <configuration name="LLMAPI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.LLMAPI" />
       <module name="News_recommendation" />
@@ -104,8 +116,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="cldbert" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.cldbert" />
+    <configuration name="Start" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.news_recommendation.Start" />
       <module name="News_recommendation" />
       <extension name="coverage">
         <pattern>
@@ -143,13 +155,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.LLMAPI" />
+      <item itemvalue="Application.member" />
+      <item itemvalue="Application.Recomender" />
+      <item itemvalue="Application.recommendation" />
+      <item itemvalue="Application.Start" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Start" />
         <item itemvalue="Application.LLMAPI" />
         <item itemvalue="Application.recommendation" />
         <item itemvalue="Application.member" />
         <item itemvalue="Application.Recomender" />
-        <item itemvalue="Application.cldbert" />
       </list>
     </recent_temporary>
   </component>
@@ -168,7 +187,9 @@
       <workItem from="1732048610629" duration="11514000" />
       <workItem from="1732261055411" duration="5484000" />
       <workItem from="1732271208489" duration="24573000" />
-      <workItem from="1732350071344" duration="519000" />
+      <workItem from="1732350071344" duration="17746000" />
+      <workItem from="1732455585263" duration="16749000" />
+      <workItem from="1732528067113" duration="2573000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -290,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732350544911</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="modifying Register.fxml for proper user interface flow">
+      <option name="closed" value="true" />
+      <created>1732350705099</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1732350705099</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,6 +339,7 @@
     <MESSAGE value="modified news class so that methods are relatively separated from javafx. Included Favourite article feature. Also redesigned database structure and queries" />
     <MESSAGE value="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles." />
     <MESSAGE value="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml" />
+    <MESSAGE value="modifying Register.fxml for proper user interface flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="modifying Register.fxml for proper user interface flow" />
   </component>
 </project>

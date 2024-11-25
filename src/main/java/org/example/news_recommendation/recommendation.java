@@ -16,29 +16,29 @@ import java.util.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 public class recommendation {
-    private List<String> genres = new ArrayList<>();
-    private JsonArray articles;
-    private JsonArray filtered;
+    private static List<String> genres = new ArrayList<>();
+    private static JsonArray articles;
+    private static JsonArray filtered;
     private JsonArray finals;
     @FXML
-    private WebView web;
-    private int currentIndex = 0;
-    private WebEngine eng;
-private Map<String, Double> categories;
+    private static WebView web;
+    private static int currentIndex = 0;
+    private static WebEngine eng;
+private static Map<String, Double> categories;
 
     @FXML
     private TextArea title;
 
     @FXML
-    private TextArea content;
+    private static TextArea content;
     private String genre;
-    private String headline;
-    private String URL;
+    private static String headline;
+    private static String URL;
 
     private String name;
-    private String articlecontent = "";
-    // Assuming categories is a Map<String, Double>
-    public void printCategories(Map<String, Double> categories) {
+    private static String articlecontent = "";
+
+    public static void printCategories(Map<String, Double> categories) {
         if (categories != null && !categories.isEmpty()) {
             // Iterate over the map and print each key-value pair
             for (Map.Entry<String, Double> entry : categories.entrySet()) {
@@ -49,7 +49,7 @@ private Map<String, Double> categories;
         }
     }
 
-    public int recommend() throws JSONException {
+    public static int recommend() throws JSONException {
         // Use UserSession to get the full name
         String name = User.getInstance().getFirstName();// Get current user
         List<String> gens = getDBdata(name); // get the genre into an arraylist
@@ -69,15 +69,12 @@ private Map<String, Double> categories;
         jsonreader jsonArticleReader = new jsonreader(filePath);
         articles = jsonArticleReader.readFile();
         filtered = news.checkifliked(articles);
-//        FilteredLikedArticles(finals);
-//        String head = PersonalizedArticles(filtered, categories);
-//        System.out.println(head);
-       // addtoDB(finals, name);//process arraylist and add to database
+
         System.out.println(name);
         return 1;
     }
 
-    public void Webarticles(String url) {
+    public static void Webarticles(String url) {
         eng = web.getEngine();
         String disablevideo = "document.querySelectorAll('video, audio').forEach(function(media) { media.autoplay = false; });";
 
@@ -96,13 +93,13 @@ private Map<String, Double> categories;
         }
     }
 
-    private void setzoom(double zoomFactor) {
+    private static void setzoom(double zoomFactor) {
         String zoomScript = "document.body.style.zoom = '" + zoomFactor + "';";
         eng.executeScript(zoomScript);
     }
 
 
-    public String PersonalizedArticles(JsonArray filteredArticles, Map<String, Double> categories) {
+    public static String PersonalizedArticles(JsonArray filteredArticles, Map<String, Double> categories) {
         if (filteredArticles == null || filteredArticles.isEmpty() || categories == null || categories.isEmpty()) {
             return "No articles available.";
         }
@@ -155,18 +152,9 @@ private Map<String, Double> categories;
         return "No articles found for selected category.";
     }
 
-    public void displayArticleController() throws JSONException {
-        int status = recommend();
-        if (status == 1) {
-            displayArticle(0); // Display the first article
-        } else if (status == 0) {
-            title.setText("No articles found.");
-            content.setText("");
 
-        }
-    }
 
-    public Map<String, Double> LLMprobability(String genres) throws JSONException {
+    public static Map<String, Double> LLMprobability(String genres) throws JSONException {
         LLMAPI llmAPI = new LLMAPI();
         String requestBody = llmAPI.generaterecommend(genres);
         String apiResponse = llmAPI.sendingRequest(requestBody);
@@ -176,100 +164,20 @@ private Map<String, Double> categories;
         return result;
     }
 
-    public void addtoDB(Map<String, Double> result, String currentUser) {
-        // Database connection details
-        String url = "jdbc:mysql://localhost:3306/truy";
-        String username = "root";
-        String password = "";
-
-        // Start constructing the update query
-        StringBuilder updateQuery = new StringBuilder("UPDATE genres_table SET ");
-
-        // Loop through the result map to dynamically add each genre and its probability
-        for (Map.Entry<String, Double> entry : result.entrySet()) {
-            String genre = entry.getKey();
-            double probability = entry.getValue();
-
-            // Append the genre column and its corresponding probability to the query
-            updateQuery.append(genre).append(" = ?, ");
-        }
-
-        // Remove the last comma and space
-        updateQuery.setLength(updateQuery.length() - 2);
-
-        // Add the WHERE condition to specify the current user
-        updateQuery.append(" WHERE first_name = ?");
-
-        // Print the query for debugging purposes (optional)
-        System.out.println("Generated SQL: " + updateQuery.toString());
-
-        // Execute the query
-        try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement updateStmt = connection.prepareStatement(updateQuery.toString())) {
-
-            // Set the probabilities for each genre in the statement
-            int index = 1;
-            for (Map.Entry<String, Double> entry : result.entrySet()) {
-                updateStmt.setDouble(index++, entry.getValue());
-            }
-
-            // Set the user name in the WHERE clause
-            updateStmt.setString(index, currentUser);
-
-            // Execute the update statement
-            int rowsUpdated = updateStmt.executeUpdate();
-            if (rowsUpdated == 0) {
-                System.out.println("No matching record found for user: " + currentUser);
-            } else {
-                System.out.println("Successfully updated probabilities for user: " + currentUser);
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error updating probabilities: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public static JsonArray getArticles(){
+        return filtered;
     }
+    public static String gettitle() {
 
-
-//    private void displayArticle(int index) throws JSONException {
-//        if (filtered != null && index >= 0 && index < filtered.size()) {
-//            JsonObject article = filtered.get(index).getAsJsonObject();
-//            String head = PersonalizedArticles(filtered, categories);
-//            // Check for title field and handle JsonNull
-//            if (article.has("headline") && !article.get("headline").isJsonNull()) {
-//                title.setText(article.get("headline").getAsString());
-//                headline = article.get("headline").getAsString();
-//            } else {
-//                title.setText("Title not available");
-//            }
-//
-//
-//            // Check for content field and handle JsonNull
-//            if (article.has("short_description") && !article.get("short_description").isJsonNull()) {
-//                content.setText(article.get("short_description").getAsString());
-//                URL = article.get("link").getAsString();
-//                articlecontent = article.get("short_description").getAsString();
-//            } else {
-//                content.setText("Content not available");
-//            }
-//
-//            currentIndex = index;
-//
-//        }
-//    }
-public void displayArticle(int index) throws JSONException {
-    if (filtered == null || filtered.isEmpty()) {
-        title.setText("No articles available");
-        content.setText("");
-        return;
+        return headline;
     }
-
-    // Ensure categories is populated before PersonalizedArticles call
-    if (categories == null || categories.isEmpty()) {
-        title.setText("No user preferences found");
-        content.setText("");
-        return;
+    public static String getcontent(){
+        return articlecontent;
     }
+    public static Map<String,Double> getCategories(){
+        return categories;
+    }
+public static void displayArticle(int index) throws JSONException {
 
     // Get personalized headline
     String personalizedHeadline = PersonalizedArticles(filtered, categories);
@@ -289,46 +197,30 @@ public void displayArticle(int index) throws JSONException {
     // Display article details
     if (selectedArticle != null) {
         headline = selectedArticle.get("headline").getAsString();
-        title.setText(headline);
+//        title.setText(headline);
 
         // Handle content
         if (selectedArticle.has("short_description") &&
                 !selectedArticle.get("short_description").isJsonNull()) {
             articlecontent = selectedArticle.get("short_description").getAsString();
-            content.setText(articlecontent);
+//            content.setText(articlecontent);
 
             // Set URL if available
             URL = selectedArticle.has("link") ?
                     selectedArticle.get("link").getAsString() : "";
-        } else {
-            content.setText("Content not available");
+//        } else {
+//            content.setText("Content not available");
         }
 
         currentIndex = index;
-    } else {
-        title.setText("No personalized article found");
-        content.setText("No matching article available.");
+//
     }
 }
 
 
 
-    public void showNextArticle() throws JSONException {
-        if (currentIndex < articles.size() - 1) {
-            displayArticle(currentIndex + 1);
-
-        }
-    }
-
-
-    public void showPreviousArticle() throws JSONException {
-        if (currentIndex > 0) {
-            displayArticle(currentIndex - 1);
-        }
-    }
-
-    public List<String> getDBdata(String name) {
-        String url = "jdbc:mysql://localhost:3306/truy";
+    public static List<String> getDBdata(String name) {
+        String url = "jdbc:mysql://localhost:3306/news";
         String username = "root";
         String password = "";
 
