@@ -23,23 +23,7 @@ public class LLMAPI {
     }
 
 
-//    public String createRequestBody(String newsDescription) {
-//        return "{\n" +
-//                "    \"model\": \"llama3-8b-8192\",\n" +
-//                "    \"messages\": [\n" +
-//                "        {\n" +
-//                "            \"role\": \"user\",\n" +
-//                "            \"content\": \"Analyze this news article and determine its category: " +
-//                "LATINO VOICES, MONEY, STYLE & BEAUTY, WORLDPOST, CRIME, U.S. NEWS, ENVIRONMENT, COMEDY, TASTE, BUSINESS, EDUCATION, SPORTS, " +
-//                "FIFTY, QUEER VOICES, COLLEGE, MEDIA, SCIENCE, HEALTHY LIVING, THE WORLDPOST, BLACK VOICES, WEDDINGS, GOOD NEWS, ENTERTAINMENT, " +
-//                "TRAVEL, HOME & LIVING, PARENTING, POLITICS, PARENTS, STYLE, CULTURE & ARTS, WEIRD NEWS, DIVORCE, GREEN, ARTS, TECH, WOMEN, IMPACT, " +
-//                "FOOD & DRINK, RELIGION, ARTS & CULTURE, WELLNESS, WORLD NEWS. " +
-//                "Respond with category only in one word:  " +
-//                newsDescription.replace("\"", "\\\"") + "\"\n" +
-//                "        }\n" +
-//                "    ]\n" +
-//                "}";
-//    }
+//
 public String createRequestBody(String newsDescription) {
     return "{\n" +
             "    \"model\": \"llama3-8b-8192\",\n" +
@@ -56,15 +40,27 @@ public String createRequestBody(String newsDescription) {
             "    ]\n" +
             "}";
 }
+    public Map<String, Double> LLMprobability(String genres) throws JSONException {
+        LLMAPI llmAPI = new LLMAPI();
+        String requestBody = llmAPI.generaterecommend(genres);
+        String apiResponse = llmAPI.sendingRequest(requestBody);
+        Map<String, Double> result = llmAPI.extractedProbabilities(apiResponse);
 
 
+        return result;
+    }
+
+
+    public String LLM(String articlecontent) throws JSONException {
+        LLMAPI llmAPI = new LLMAPI();
+        String requestBody = llmAPI.createRequestBody(articlecontent);
+        String apiResponse = llmAPI.sendingRequest(requestBody);
+
+
+        return llmAPI.recieverequest(apiResponse);
+    }
 
     public String generaterecommend(String genre) {
-        // List of predefined genres
-//        String genreList = "LATINO VOICES, MONEY, STYLE & BEAUTY, WORLDPOST, CRIME, U.S. NEWS, ENVIRONMENT, COMEDY, TASTE, BUSINESS, EDUCATION, SPORTS, " +
-//                "FIFTY, QUEER VOICES, COLLEGE, MEDIA, SCIENCE, HEALTHY LIVING, THE WORLDPOST, BLACK VOICES, WEDDINGS, GOOD NEWS, ENTERTAINMENT, " +
-//                "TRAVEL, HOME & LIVING, PARENTING, POLITICS, PARENTS, STYLE, CULTURE & ARTS, WEIRD NEWS, DIVORCE, GREEN, ARTS, TECH, WOMEN, IMPACT, " +
-//                "FOOD & DRINK, RELIGION, ARTS & CULTURE, WELLNESS, WORLD NEWS.";
 
         return "{\n" +
                 "    \"model\": \"llama3-8b-8192\",\n" +
@@ -138,34 +134,7 @@ public String createRequestBody(String newsDescription) {
 
         return categoriesWithProbabilities;
     }
-//    public static void main(String[] args) {
-//        // Create an instance of the LLMAPI class
-//        LLMAPI api = new LLMAPI();
-//        String sampleNewsDescription = "The recent advancements in AI and machine learning are revolutionizing industries, making processes more efficient and creating new opportunities for businesses.";
-//        String genreo = "HEALTH,HEALTH,TECH,WORLD NEWS, MEDIA";
-//
-//       // String requestBody = api.createRequestBody(sampleNewsDescription);
-//
-//        String requestBody= api.generaterecommend(genreo);
-//
-//        // Send the request and get the response
-//        String response = api.sendingRequest(requestBody);
-//        System.out.println("API Response: \n" + response);
-//
-//
-//        //List<String> result = extractedprobabilities(response);
-////
-////        // Print the result
-////        for (String item : result) {
-////            System.out.println(item);
-////        }
-//        // Attempt to extract and print the category from the response
-////        try {
-////            String category = api.recieverequest(response);
-////            System.out.println("Category: " + category);
-////        } catch (Exception e) {
-////            e.printStackTrace();
-////        }
+
     }
 
 

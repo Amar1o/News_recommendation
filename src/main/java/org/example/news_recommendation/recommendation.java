@@ -16,7 +16,7 @@ import java.util.*;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 public class recommendation {
-    private static List<String> genres = new ArrayList<>();
+//    private static List<String> genres = new ArrayList<>();
     private static JsonArray articles;
     private static JsonArray filtered;
     private JsonArray finals;
@@ -38,6 +38,8 @@ private static Map<String, Double> categories;
     private String name;
     private static String articlecontent = "";
 
+    static Database sql = new Database();
+    static LLMAPI ll = new LLMAPI();
     public static void printCategories(Map<String, Double> categories) {
         if (categories != null && !categories.isEmpty()) {
             // Iterate over the map and print each key-value pair
@@ -52,12 +54,12 @@ private static Map<String, Double> categories;
     public static int recommend() throws JSONException {
         // Use UserSession to get the full name
         String name = User.getInstance().getFirstName();// Get current user
-        List<String> gens = getDBdata(name); // get the genre into an arraylist
+        List<String> gens = sql.getDBdata(name); // get the genre into an arraylist
         System.out.println(gens);
 
 
         String genresString = String.join(", ", gens); // turn into String values for LLM processing
-        categories = LLMprobability(genresString);
+        categories = ll.LLMprobability(genresString);
         printCategories(categories);
         System.out.println("space1");
         if (categories == null || categories.isEmpty()) {
@@ -68,7 +70,7 @@ private static Map<String, Double> categories;
         String filePath = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
         jsonreader jsonArticleReader = new jsonreader(filePath);
         articles = jsonArticleReader.readFile();
-        filtered = news.checkifliked(articles);
+        filtered = sql.checkifliked(articles);
 
         System.out.println(name);
         return 1;
@@ -83,14 +85,6 @@ private static Map<String, Double> categories;
         eng.executeScript(disablevideo);
         eng.load(url);
         setzoom(1.0);
-    }
-
-    public void viewarticles() {
-        if (URL != null && !URL.isEmpty()) {
-            Webarticles(URL);
-        } else {
-            System.out.println("No valid URL to display.");
-        }
     }
 
     private static void setzoom(double zoomFactor) {
@@ -132,10 +126,6 @@ private static Map<String, Double> categories;
 
             if (article.has("category") && article.has("headline")) {
                 String articleCategory = article.get("category").getAsString();
-                System.out.println(selectedCategory);
-                System.out.println("---------------------------------------");
-                System.out.println(articleCategory);
-
 
                 if (articleCategory.equalsIgnoreCase(selectedCategory)) {
                     matchingArticles.add(article);
@@ -153,18 +143,8 @@ private static Map<String, Double> categories;
     }
 
 
-
-    public static Map<String, Double> LLMprobability(String genres) throws JSONException {
-        LLMAPI llmAPI = new LLMAPI();
-        String requestBody = llmAPI.generaterecommend(genres);
-        String apiResponse = llmAPI.sendingRequest(requestBody);
-        Map<String, Double> result = llmAPI.extractedProbabilities(apiResponse);
-
-
-        return result;
-    }
-
     public static JsonArray getArticles(){
+
         return filtered;
     }
     public static String gettitle() {
@@ -172,12 +152,14 @@ private static Map<String, Double> categories;
         return headline;
     }
     public static String getcontent(){
+
         return articlecontent;
     }
     public static Map<String,Double> getCategories(){
+
         return categories;
     }
-public static void displayArticle(int index) throws JSONException {
+public static void Recommendedarticles(int index) throws JSONException {
 
     // Get personalized headline
     String personalizedHeadline = PersonalizedArticles(filtered, categories);
@@ -208,57 +190,12 @@ public static void displayArticle(int index) throws JSONException {
             // Set URL if available
             URL = selectedArticle.has("link") ?
                     selectedArticle.get("link").getAsString() : "";
-//        } else {
-//            content.setText("Content not available");
+
         }
 
         currentIndex = index;
-//
+
     }
 }
-
-
-
-    public static List<String> getDBdata(String name) {
-        String url = "jdbc:mysql://localhost:3306/news";
-        String username = "root";
-        String password = "";
-
-        // Query to retrieve all genres for the given name
-        String query = "SELECT genre FROM preference WHERE name = ?";
-
-
-        try {
-            // Load the MySQL driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Connect to the database
-            try (Connection connection = DriverManager.getConnection(url, username, password);
-                 PreparedStatement statement = connection.prepareStatement(query)) {
-
-                // Set the parameter for the name in the query
-                statement.setString(1, name);
-
-                // Execute the query and process the result
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        // Add each genre to the list
-                        genres.add(resultSet.getString("genre"));
-                    }
-                }
-            }
-
-            if (genres.isEmpty()) {
-                genres.add("No data found for name: " + name);
-            }
-
-        } catch (Exception e) {
-            System.err.println("Error retrieving data: " + e.getMessage());
-            e.printStackTrace();
-            genres.add("Error retrieving data.");
-        }
-
-        return genres;
-    }
 
 }

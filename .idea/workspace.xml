@@ -4,20 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="modifying Register.fxml for proper user interface flow">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_11_2024_22_48_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_16_11_2024_22_48__Changes_.xml" beforeDir="false" />
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="Separated javafx code into respective controller classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RecommendationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Start.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/newsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/newsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/recommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/recommendation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Register.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/personalizedarticles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/personalizedarticles.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +185,8 @@
       <workItem from="1732271208489" duration="24573000" />
       <workItem from="1732350071344" duration="17746000" />
       <workItem from="1732455585263" duration="16749000" />
-      <workItem from="1732528067113" duration="2573000" />
+      <workItem from="1732528067113" duration="20231000" />
+      <workItem from="1732711921786" duration="8517000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -319,7 +316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732350705099</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Separated javafx code into respective controller classes">
+      <option name="closed" value="true" />
+      <created>1732547415546</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1732547415547</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,6 +345,7 @@
     <MESSAGE value="created user class and removed member.&#10;adapted LLMAPI for complex requesting such as probabilities. Added filtration of articles based on liked articles." />
     <MESSAGE value="created recommendation class&#10;created fxml for recommendation class named personalizedarticles.fxml&#10;modified article fxml file to lead to personalizedarticles.fxml" />
     <MESSAGE value="modifying Register.fxml for proper user interface flow" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifying Register.fxml for proper user interface flow" />
+    <MESSAGE value="Separated javafx code into respective controller classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separated javafx code into respective controller classes" />
   </component>
 </project>

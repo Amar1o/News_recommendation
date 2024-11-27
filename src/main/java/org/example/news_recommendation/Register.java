@@ -94,61 +94,7 @@ public class Register {
             return -1;
         }
     }
-//@FXML
-//    private void switchback() {
-//        try {
-//
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-//            Parent root = loader.load();
-//
-//
-//            Stage stage = (Stage) back.getScene().getWindow();
-//
-//
-//            stage.setTitle("Login");
-//
-//            Scene scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.sizeToScene();
-//            stage.show();
-//
-//
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.err.println("Failed to load Article.fxml.");
-//        }
-//    }
-//    @FXML
-//    public void Registerc() throws SQLException, ClassNotFoundException {
-//
-//        String fname = firstname.getText();
-//        String lname = lastname.getText();
-//        String Pword = password.getText();
-//
-//        int result = register(fname, lname,Pword);
-//        switch (result) {
-//            case 0:
-//                clearTextFields();
-//                success.setVisible(true);
-//                success.setText("Member successfully registered!");
-//                //System.out.println("Registered Member: " + registeredMember);
-//                break;
-//            case 1:
-//                clearTextFields();
-//                this.success.setText("Member already exists");
-//                break;
-//            case 4:
-//                clearTextFields();
-//                this.success.setText("Passwords do not match");
-//                break;
-//
-//                default:
-//                System.out.println("An error occurred.");
-//                break;
-//        }
-//    }
+
 
 
 }

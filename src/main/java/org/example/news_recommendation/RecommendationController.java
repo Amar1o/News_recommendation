@@ -73,12 +73,9 @@ private Button back;
 
     public void displayArticleController() throws JSONException {
 
-
-
-
         int status = recommendation.recommend();
         if (status == 1) {
-            recommendation.displayArticle(0); // Display the first article
+            recommendation.Recommendedarticles(0); // Display the first article
             filtered= recommendation.getArticles();
             categories = recommendation.getCategories();
             String head=recommendation.gettitle();
@@ -90,7 +87,7 @@ private Button back;
             if (filtered == null || filtered.isEmpty()) {
                 title.setText("No articles available");
                 content.setText("");
-                return;
+
             }
         } else if (status == 0) {
             title.setText("No articles found.");
@@ -100,7 +97,7 @@ private Button back;
     }
     public void showNextArticle() throws JSONException {
         if (currentIndex < articles.size() - 1) {
-            recommendation.displayArticle(currentIndex + 1);
+            recommendation.Recommendedarticles(currentIndex + 1);
            String head=recommendation.gettitle();
            String cont=recommendation.getcontent();
             title.setText(head);
@@ -113,7 +110,7 @@ private Button back;
 
     public void showPreviousArticle() throws JSONException {
         if (currentIndex > 0) {
-            recommendation.displayArticle(currentIndex - 1);
+            recommendation.Recommendedarticles(currentIndex - 1);
             title.setText(headline);
             content.setText(articlecontent);
         }
