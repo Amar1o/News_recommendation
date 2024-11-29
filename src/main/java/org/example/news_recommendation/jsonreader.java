@@ -32,23 +32,5 @@ public class jsonreader {
     }
 
 
-    public void readFileWithRateLimit() {
-        JsonArray jsonArray = readFile();
-
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JsonObject article = jsonArray.get(i).getAsJsonObject();
-
-            // Print or process the article (for demonstration purposes)
-            System.out.println("Processed article: " + article);
-
-            try {
-                // Wait for 2 seconds to ensure the rate of 30 articles per minute
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.err.println("Thread was interrupted");
-            }
-        }
-    }
 
 }

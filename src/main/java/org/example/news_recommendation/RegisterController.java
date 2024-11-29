@@ -29,6 +29,7 @@ public class RegisterController {
     @FXML
     private Text success;
 
+    static Database sql = new Database();
     @FXML
     private void switchback() {
         try {
@@ -81,7 +82,7 @@ public class RegisterController {
         }
 
         // Only attempt to register if passwords match
-        int result = Register.register(fname, lname, Pword);
+        int result = sql.register(fname, lname, Pword);
 
         switch (result) {
             case 0:

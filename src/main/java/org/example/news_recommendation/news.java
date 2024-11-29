@@ -16,73 +16,18 @@ import java.util.concurrent.Executors;
 
 public class news {
 
-    @FXML
-    private static WebView web;
-
-    private static WebEngine eng;
-
-    @FXML
-    private Button submit;
-
-    @FXML
-    private  TextArea title;
-
-    @FXML
-    private  TextArea content;
-    @FXML
-    private Button prev;
-    @FXML
-    private Button forward;
     private static JsonArray articles; // Holds all articles received from the API
     private static int currentIndex = 0; // Keeps track of the currently displayed article
-private static JsonArray filtered;
+    private static JsonArray filtered;
 
     private static String genre;
     private static String headline;
     private static String URL;
 
-    private String name;
     private static String articlecontent = "";
-    private ExecutorService executorService = Executors.newFixedThreadPool(3);
-    private static CompletableFuture<Void> webLoadingFuture;
-    private static ExecutorService webExecutor = Executors.newSingleThreadExecutor();
 
     static Database sql = new Database();
     static LLMAPI ll = new LLMAPI();
-    public static void Webarticles(String url) {
-        // If already loading this URL, don't start again
-        if (webLoadingFuture != null && !webLoadingFuture.isDone()) {
-            return;
-        }
-
-        webLoadingFuture = CompletableFuture.runAsync(() -> {
-            Platform.runLater(() -> {
-                if (eng == null) {
-                    eng = web.getEngine();
-                }
-
-                String disablevideo = "document.querySelectorAll('video, audio').forEach(function(media) { media.autoplay = false; });";
-                String disableImages = "document.querySelectorAll('img').forEach(function(img) { img.style.display = 'none'; });";
-
-                eng.load(url);
-
-                // Wait for page load to complete before running scripts
-                eng.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
-                    if (newState == Worker.State.SUCCEEDED) {
-                        eng.executeScript(disableImages);
-                        eng.executeScript(disablevideo);
-                        setzoom(1.0);
-                    }
-                });
-            });
-        }, webExecutor);
-    }
-
-
-    private static void setzoom(double zoomFactor) {
-        String zoomScript = "document.body.style.zoom = '" + zoomFactor + "';";
-        eng.executeScript(zoomScript);
-    }
 
     public static int loadarticlesController(String filepath) {
 
@@ -105,9 +50,7 @@ private static JsonArray filtered;
     }
 
 
-    public JsonArray getArticles(){
-        return filtered;
-    }
+
 
     public  void displayArticle(int index) throws JSONException {
         if (filtered != null && index >= 0 && index < filtered.size()) {
@@ -120,7 +63,7 @@ private static JsonArray filtered;
                 headline = article.get("headline").getAsString();
                 articlecontent = article.get("short_description").getAsString();
             } else {
-                this.title.setText("Title not available");
+                headline = "no title available";
             }
             genre = ll.LLM(articlecontent);
             System.out.println(genre);
@@ -129,22 +72,29 @@ private static JsonArray filtered;
         }
     }
 
-    public static int getCurrentIndex(){
+
+
+    public int getCurrentIndex(){
         return currentIndex;
     }
-public static String getURL(){
+    public  String getURL(){
+
         return  URL;
-}
-    public static String gettitle() {
+    }
+    public  String gettitle() {
 
         return headline;
     }
     public String getcontent(){
         return articlecontent;
     }
-public static String getgenre(){
+    public  String getgenre(){
         return genre;
-}
+    }
+    public JsonArray getArticles(){
+
+        return filtered;
+    }
 
 
 }

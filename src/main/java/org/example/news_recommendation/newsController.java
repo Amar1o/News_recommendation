@@ -22,47 +22,40 @@ import java.util.concurrent.Executors;
 
 public class newsController {
 
-    @FXML
-    private WebView web;
 
-    private WebEngine eng;
 
-    @FXML
-    private Button submit;
 
     @FXML
     private TextArea title;
 
     @FXML
     private TextArea content;
-    @FXML
-    private Button prev;
-    @FXML
-    private Button forward;
+
     private JsonArray articles; // Holds all articles received from the API
     private int currentIndex = 0; // Keeps track of the currently displayed article
-    private JsonArray filtered;
-
     private String genre;
     private String headline;
     private String URL;
 
     private String name;
-    private String articlecontent = "";
+    @FXML
+    private WebView web;
+
+    private static WebEngine eng;
+
     private ExecutorService executorService = Executors.newFixedThreadPool(3);
     private CompletableFuture<Void> webLoadingFuture;
     private ExecutorService webExecutor = Executors.newSingleThreadExecutor();
-
+    static User user = new User();
     static Database sql = new Database();
     news newsInstance = new news();
     public void favarticle() throws ClassNotFoundException {
-        URL=news.getURL();
-        headline=news.gettitle();
-        genre=news.getgenre();
+        URL=newsInstance.getURL();
+        headline=newsInstance.gettitle();
+        genre=newsInstance.getgenre();
         if (headline != null && genre != null && URL != null) {
-            name = User.getInstance().getFirstName();
+            name = user.getInstance().getFirstName();
             sql.AddtoDB(name,headline,genre,URL);
-            System.out.println("Article added to favorites: " + headline);
         } else {
             System.out.println("No valid article to add to favorites.");
             System.out.println(headline);
@@ -71,6 +64,7 @@ public class newsController {
 
         }
     }
+
     @FXML
     private void switchtorecommended(ActionEvent event) {
         try {
@@ -130,7 +124,7 @@ public class newsController {
         }).start();
     }
     public void showNextArticle() throws JSONException {
-        if (news.getCurrentIndex() < articles.size() - 1) {
+        if (newsInstance.getCurrentIndex() < articles.size() - 1) {
             newsInstance.displayArticle(currentIndex ++);
             String titl= newsInstance.gettitle();
             String contnt= newsInstance.getcontent();
@@ -143,7 +137,7 @@ public class newsController {
 
 
     public void showPreviousArticle() throws JSONException {
-        if (news.getCurrentIndex() > 0) {
+        if (newsInstance.getCurrentIndex() > 0) {
             newsInstance.displayArticle(currentIndex --);
             String titl= newsInstance.gettitle();
             String contnt= newsInstance.getcontent();
@@ -152,25 +146,25 @@ public class newsController {
             this.title.setText(titl);
         }
     }
+
+    public  void Webarticles(String url) {
+        eng = web.getEngine();
+        eng.load(url);
+    }
     @FXML
     public void viewarticles() {
+        URL=newsInstance.getURL();
+
         if (URL != null && !URL.isEmpty()) {
-            // If content is still loading, wait for it to complete
-            if (webLoadingFuture != null && !webLoadingFuture.isDone()) {
-                webLoadingFuture.thenRun(() -> {
-                    Platform.runLater(() -> {
-                        web.setVisible(true);  // Show the WebView when content is ready
-                    });
-                });
-            } else {
-                // If not already loading, start loading now
-                news.Webarticles(URL);
-                web.setVisible(true);
-            }
-        } else {
+
+            Webarticles(URL);
+            web.setVisible(true);  // Show the WebView when content is ready
+        }
+        else {
             System.out.println("No valid URL to display.");
         }
     }
+
     @FXML
     private void Viewliked(ActionEvent event) {
         try {
@@ -186,7 +180,6 @@ public class newsController {
             Scene scene = new Scene(root);
             newStage.setScene(scene);
 
-            // Optional: Disable resizing of the new window
             newStage.setResizable(false);
 
             // Show the new stage

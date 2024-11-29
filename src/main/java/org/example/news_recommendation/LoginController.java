@@ -26,17 +26,18 @@ public class LoginController {
     @FXML
     public TextField Password;
 
-
+    static Database sql = new Database();
+    static User user = new User();
     @FXML
     public void submit() {
         String inputFirstName = firstname.getText();
         String inputpassword = Password.getText();
-        int result = Login.validate(inputFirstName, inputpassword);
+        int result = sql.validate(inputFirstName, inputpassword);
         if (result == 1) {
             success.setText("Login successful! Welcome, " + inputFirstName + "!");
             success.setVisible(true);
             switchtoarticle();
-            User.getInstance().setUserDetails(inputFirstName, inputpassword);
+            user.getInstance().setUserDetails(inputFirstName, inputpassword);
         } else if (result == 2) {
             success.setText("Invalid name or password.");
             success.setVisible(true);

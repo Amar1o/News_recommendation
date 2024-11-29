@@ -10,6 +10,7 @@ import java.util.concurrent.CompletableFuture;
 
 
 public class Database {
+    static User user = new User();
     private static List<String> genres = new ArrayList<>();
     private static List<String> headline = new ArrayList<>();
     public JsonArray checkifliked(JsonArray articles) {
@@ -18,7 +19,7 @@ public class Database {
             String username = "root";
             String password = "";
             String query = "SELECT headline FROM preference WHERE name = ? AND headline = ?";
-            String name = User.getInstance().getFirstName();
+            String name = user.getInstance().getFirstName();
             JsonArray filteredArticles = new JsonArray();
 
             try (Connection connection = DriverManager.getConnection(url, username, password);
@@ -196,4 +197,101 @@ public class Database {
 
         return headline;
     }
+
+    public int register(String firstname, String lastName, String pasword) throws SQLException, ClassNotFoundException {
+        String url = "jdbc:mysql://localhost:3306/news";
+        String username = "root";
+        String password = "";
+
+        String selectSql = "SELECT * FROM members WHERE first_name = ?";
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Ensure MySQL driver is loaded
+
+            try (Connection connection = DriverManager.getConnection(url, username, password);
+                 PreparedStatement selectStmt = connection.prepareStatement(selectSql)) {
+
+                if (connection != null) {
+                    System.out.println("Connected to the database!");
+                }
+                selectStmt.setString(1, firstname);
+
+                try (ResultSet rs = selectStmt.executeQuery()) {
+                    if (rs.next()) {
+                        System.out.println("Name already exists!");
+                        return 1;
+                    }
+                    else {
+                        System.out.println("Registering new user...");
+                        String insrtSQL = "INSERT INTO members (first_name, last_name, password ) VALUES (?, ?, ?)";
+                        try (PreparedStatement insertStmt = connection.prepareStatement(insrtSQL)) {
+                            insertStmt.setString(1, firstname);
+                            insertStmt.setString(2, lastName);
+                            insertStmt.setString(3,pasword);
+
+
+                            // Execute the insert statement
+                            int rowsAffected = insertStmt.executeUpdate();
+                            if (rowsAffected > 0) {
+                                System.out.println("Insert successful! " + rowsAffected + " row(s) affected.");
+                            }
+                        }
+                    }
+                }
+
+            }
+            return 0;
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("mysql driver not included in path");
+            e.printStackTrace();
+            return -1;
+
+        } catch (SQLException e) {
+            System.out.println("Database connection error or query");
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    public int validate(String firstName, String Password) {
+        String url = "jdbc:mysql://localhost:3306/news";
+        String sql = "SELECT * FROM members WHERE first_name = ? AND password = ?";
+        String username = "root";
+        String password = "";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Ensure MySQL driver is loaded
+
+            try (Connection connection = DriverManager.getConnection(url, username, password);
+                 PreparedStatement pre = connection.prepareStatement(sql)) {
+
+                if (connection != null) {
+                    System.out.println("Connected to the database!");
+                }
+
+                pre.setString(1, firstName);
+                pre.setString(2, Password);
+
+                try (ResultSet rs = pre.executeQuery()) {
+                    if (rs.next()) {
+                        System.out.println("Login successful! Welcome, " + firstName + "!");
+                        return 1;
+                    } else {
+                        System.out.println("Invalid first name or password.");
+                        return 2;
+                    }
+                }
+
+            }
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+            return 0;
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+            return 0;
+        }
+    }
+
 }

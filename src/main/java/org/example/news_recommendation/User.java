@@ -10,12 +10,12 @@ public class User {
     private boolean Logged;
 
     // Private constructor to prevent direct instantiation
-    private User() {
+    User() {
         Logged = false;
     }
 
     // Singleton getInstance method
-    public static User getInstance() {
+    public User getInstance() {
         if (instance == null) {
             instance = new User();
         }

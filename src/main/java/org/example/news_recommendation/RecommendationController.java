@@ -20,29 +20,24 @@ import java.util.List;
 import java.util.Map;
 
 public class RecommendationController {
-    private List<String> genres = new ArrayList<>();
-    private JsonArray articles;
     private JsonArray filtered;
-    private JsonArray finals;
     @FXML
     private WebView web;
     private int currentIndex = 0;
-    private WebEngine eng;
+    private static WebEngine eng;
     private Map<String, Double> categories;
-
     @FXML
     private TextArea title;
-
     @FXML
     private TextArea content;
-    private String genre;
     private String headline;
     private String URL;
-@FXML
-private Button back;
-    private String name;
+    @FXML
+    private Button back;
     private String articlecontent = "";
-    recommendation recom = new recommendation();
+   static recommendation recom = new recommendation();
+   static news news = new news();
+
 
     @FXML
     private void switchtoarticle() {
@@ -62,9 +57,6 @@ private Button back;
             stage.sizeToScene();
             stage.show();
 
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Failed to load Article.fxml.");
@@ -73,19 +65,18 @@ private Button back;
 
     public void displayArticleController() throws JSONException {
 
-        int status = recommendation.recommend();
+        int status = recom.recommend();
         if (status == 1) {
-            recommendation.Recommendedarticles(0); // Display the first article
-            filtered= recommendation.getArticles();
-            categories = recommendation.getCategories();
-            String head=recommendation.gettitle();
-            String cont=recommendation.getcontent();
+            recom.Recommendedarticles(0); // Display the first article
+            filtered= recom.getArticles();
+            categories = recom.getCategories();
+            String head=recom.gettitle();
+            String cont=recom.getcontent();
             title.setText(head);
             content.setText(cont);
-            articles=recommendation.getArticles();
 
             if (filtered == null || filtered.isEmpty()) {
-                title.setText("No articles available");
+                title.setText("Like an article to start");
                 content.setText("");
 
             }
@@ -96,10 +87,10 @@ private Button back;
         }
     }
     public void showNextArticle() throws JSONException {
-        if (currentIndex < articles.size() - 1) {
-            recommendation.Recommendedarticles(currentIndex + 1);
-           String head=recommendation.gettitle();
-           String cont=recommendation.getcontent();
+        if (currentIndex < filtered.size() - 1) {
+            recom.Recommendedarticles(currentIndex + 1);
+           String head=recom.gettitle();
+           String cont=recom.getcontent();
             title.setText(head);
             content.setText(cont);
 
@@ -110,14 +101,21 @@ private Button back;
 
     public void showPreviousArticle() throws JSONException {
         if (currentIndex > 0) {
-            recommendation.Recommendedarticles(currentIndex - 1);
+            recom.Recommendedarticles(currentIndex - 1);
             title.setText(headline);
             content.setText(articlecontent);
         }
     }
+
+    public  void Webarticles(String url) {
+        eng = web.getEngine();
+        eng.load(url);
+
+    }
     public void viewarticles() {
+        URL=recom.getURL();
         if (URL != null && !URL.isEmpty()) {
-            recommendation.Webarticles(URL);
+            Webarticles(URL);
         } else {
             System.out.println("No valid URL to display.");
         }
