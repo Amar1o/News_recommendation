@@ -79,13 +79,17 @@ public class RecommendationController {
         int status = recom.recommend();
         switch (status) {
             case 1:
-                recom.Recommendedarticles(0); // Display the first article
-                filtered = recom.getArticles();
-                categories = recom.getCategories();
-                String head = recom.gettitle();
-                String cont = recom.getcontent();
-                title.setText(head);
-                content.setText(cont);
+                int check = recom.Recommendedarticles(0); // Display the first article
+                if (check==0) {
+                    filtered = recom.getArticles();
+                    categories = recom.getCategories();
+                    String head = recom.gettitle();
+                    String cont = recom.getcontent();
+                    title.setText(head);
+                    content.setText(cont);
+                }else {
+                    title.setText("No articles found for selected category.");
+                }
                 break;
 
             case 0:
@@ -101,13 +105,17 @@ public class RecommendationController {
     }
     public void showNextArticle() throws JSONException {
         if (currentIndex < filtered.size() - 1) {
-            recom.Recommendedarticles(currentIndex + 1);
-           String head=recom.gettitle();
-           String cont=recom.getcontent();
-            title.setText(head);
-            content.setText(cont);
+            int check =recom.Recommendedarticles(currentIndex + 1);
+           if(check == 0) {
+               String head = recom.gettitle();
+               String cont = recom.getcontent();
+               title.setText(head);
+               content.setText(cont);
 
-
+           }else{
+               title.setText("No articles found for selected category.");
+                content.setText("");
+           }
         }
     }
 

@@ -130,11 +130,15 @@ public class recommendation {
         return URL;
     }
 
-    public void Recommendedarticles(int index) throws JSONException {
+    public int Recommendedarticles(int index) throws JSONException {
 
         // Get personalized headline
         String personalizedHeadline = PersonalizedArticles(filtered, categories);
         System.out.println(personalizedHeadline);
+        if (personalizedHeadline== "No articles found for selected category."){
+            return 1;
+
+        }
 
         // Find matching article
         JsonObject selectedArticle = null;
@@ -167,6 +171,7 @@ public class recommendation {
             currentIndex = index;
 
         }
+        return 0;
     }
 
 }

@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="deleted login class">
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="edited code, used better object calling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LLMAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/LLMAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/recommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/recommendation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RecommendationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RegisterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/ViewLiked.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/ViewLiked.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/news.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/newsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/recommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/recommendation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Article.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/personalizedarticles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/personalizedarticles.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +192,7 @@
       <workItem from="1733217855377" duration="640000" />
       <workItem from="1733227793638" duration="4483000" />
       <workItem from="1733307539907" duration="8535000" />
-      <workItem from="1733316620241" duration="5758000" />
+      <workItem from="1733316620241" duration="8817000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -357,7 +346,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732900024953</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="edited code, used better object calling">
+      <option name="closed" value="true" />
+      <created>1733340215407</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1733340215408</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +378,8 @@
     <MESSAGE value="Separated javafx code into respective controller classes" />
     <MESSAGE value="made a database class and added multithreading for the loadarticle feature" />
     <MESSAGE value="deleted login class" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted login class" />
+    <MESSAGE value="edited code, used better object calling" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited code, used better object calling" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
