@@ -1,10 +1,8 @@
 package org.example.news_recommendation;
 
 import com.google.gson.JsonArray;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,11 +10,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import org.example.news_recommendation.Models.Database;
+import org.example.news_recommendation.Models.User;
+import org.example.news_recommendation.Models.news;
+import org.example.news_recommendation.Models.recommendation;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class RecommendationController {
@@ -34,10 +34,20 @@ public class RecommendationController {
     private String URL;
     @FXML
     private Button back;
+
+    private String name;
+
+    private String genre;
+
+
+
     private String articlecontent = "";
    static recommendation recom = new recommendation();
-   static news news = new news();
+   news newsInstance = new news();
 
+   User user = new User();
+
+   Database sql = new Database();
 
     @FXML
     private void switchtoarticle() {
@@ -64,26 +74,29 @@ public class RecommendationController {
     }
 
     public void displayArticleController() throws JSONException {
+        this.title.setText("Loading personalized articles...");
 
         int status = recom.recommend();
-        if (status == 1) {
-            recom.Recommendedarticles(0); // Display the first article
-            filtered= recom.getArticles();
-            categories = recom.getCategories();
-            String head=recom.gettitle();
-            String cont=recom.getcontent();
-            title.setText(head);
-            content.setText(cont);
+        switch (status) {
+            case 1:
+                recom.Recommendedarticles(0); // Display the first article
+                filtered = recom.getArticles();
+                categories = recom.getCategories();
+                String head = recom.gettitle();
+                String cont = recom.getcontent();
+                title.setText(head);
+                content.setText(cont);
+                break;
 
-            if (filtered == null || filtered.isEmpty()) {
+            case 0:
+                title.setText("No articles found.");
+                content.setText("");
+                break;
+
+            case 2:
                 title.setText("Like an article to start");
                 content.setText("");
-
-            }
-        } else if (status == 0) {
-            title.setText("No articles found.");
-            content.setText("");
-
+                break;
         }
     }
     public void showNextArticle() throws JSONException {
@@ -98,14 +111,23 @@ public class RecommendationController {
         }
     }
 
+    public void favarticle() throws ClassNotFoundException {
+        URL=recom.getURL();
+        headline=recom.gettitle();
+        genre=recom.getgenre();
+        if (headline != null && genre != null && URL != null) {
+            name = user.getInstance().getFirstName();
+            sql.AddtoDB(name,headline,genre,URL);
+        } else {
+            System.out.println("No valid article to add to favorites.");
+            this.content.setText("No valid article to add to favourites");
+            System.out.println(headline);
+            System.out.println(genre);
+            System.out.println(URL);
 
-    public void showPreviousArticle() throws JSONException {
-        if (currentIndex > 0) {
-            recom.Recommendedarticles(currentIndex - 1);
-            title.setText(headline);
-            content.setText(articlecontent);
         }
     }
+
 
     public  void Webarticles(String url) {
         eng = web.getEngine();

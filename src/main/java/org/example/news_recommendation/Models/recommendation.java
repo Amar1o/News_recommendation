@@ -1,15 +1,18 @@
-package org.example.news_recommendation;
+package org.example.news_recommendation.Models;
 
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.example.news_recommendation.jsonreader;
 import org.json.JSONException;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 public class recommendation {
+
     private static JsonArray articles;
+
     private static JsonArray filtered;
     private static int currentIndex = 0;
     private static Map<String, Double> categories;
@@ -20,11 +23,9 @@ public class recommendation {
     static User user = new User();
     static Database sql = new Database();
     static LLMAPI ll = new LLMAPI();
+    private String genre;
     String filePath = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
     jsonreader jsonread = new jsonreader(filePath);
-
-
-
     public int recommend() throws JSONException {
         // Use UserSession to get the full name
         gens.clear();
@@ -32,7 +33,10 @@ public class recommendation {
         String name = user.getInstance().getFirstName();// Get current user
         gens = sql.getDBdata(name); // get the genre into an arraylist
         System.out.println(gens);
-
+        if (gens.contains("No data found for name: " + name)) {
+            System.out.println("no articles");
+            return 2; // Return 2 if the message is found
+        }
 
         String genresString = String.join(", ", gens); // turn into String values for LLM processing
         categories = ll.LLMprobability(genresString);
@@ -44,7 +48,8 @@ public class recommendation {
 
         articles = jsonread.readFile();
         filtered = sql.checkifliked(articles);
-
+//        articles = newsInstance.getArticles();
+//        filtered = sql.checkifliked(articles);
         System.out.println(name);
         return 1;
     }
@@ -75,7 +80,9 @@ public class recommendation {
         // Randomly select category based on weights
         Random random = new Random();
         String selectedCategory = weightedCategories.get(random.nextInt(weightedCategories.size()));
+        genre = selectedCategory;
 
+        System.out.println(selectedCategory);
         // Find all articles matching selected category
         List<JsonObject> matchingArticles = new ArrayList<>();
         for (int i = 0; i < filteredArticles.size(); i++) {
@@ -100,13 +107,16 @@ public class recommendation {
     }
 
 
-    public JsonArray getArticles(){
 
+    public JsonArray getArticles(){
         return filtered;
     }
     public  String gettitle() {
 
         return headline;
+    }
+    public  String getgenre(){
+        return genre;
     }
     public  String getcontent(){
 
@@ -140,13 +150,13 @@ public class recommendation {
         // Display article details
         if (selectedArticle != null) {
             headline = selectedArticle.get("headline").getAsString();
-    //        title.setText(headline);
+
 
             // Handle content
             if (selectedArticle.has("short_description") &&
                     !selectedArticle.get("short_description").isJsonNull()) {
                 articlecontent = selectedArticle.get("short_description").getAsString();
-    //            content.setText(articlecontent);
+
 
                 // Set URL if available
                 URL = selectedArticle.has("link") ?

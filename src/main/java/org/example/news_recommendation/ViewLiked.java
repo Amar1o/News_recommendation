@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import org.example.news_recommendation.Models.Database;
+import org.example.news_recommendation.Models.User;
+
 import java.util.ArrayList;
 import java.util.List;
 

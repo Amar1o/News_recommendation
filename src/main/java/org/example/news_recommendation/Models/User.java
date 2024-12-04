@@ -1,4 +1,6 @@
-package org.example.news_recommendation;
+package org.example.news_recommendation.Models;
+
+import java.sql.*;
 
 public class User {
     // Singleton instance of the user session
@@ -9,8 +11,10 @@ public class User {
     private String lastName;
     private boolean Logged;
 
+    static Database sql = new Database();
+
     // Private constructor to prevent direct instantiation
-    User() {
+    public User() {
         Logged = false;
     }
 
@@ -55,4 +59,18 @@ public class User {
         lastName = null;
         Logged = false;
     }
+
+    public int Login(String firstName, String Password){
+        int check = sql.validate(firstName,Password);
+        if (check==1){
+            return 1;
+        }else if (check ==2){
+            return 2;
+        }else{
+            return 0;
+        }
+
+    }
+
+
 }

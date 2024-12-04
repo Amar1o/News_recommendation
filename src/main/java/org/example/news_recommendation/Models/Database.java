@@ -1,4 +1,4 @@
-package org.example.news_recommendation;
+package org.example.news_recommendation.Models;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -144,14 +144,19 @@ public class Database {
                 }
             }
 
-            if (genres.isEmpty()) {
-                genres.add("No data found for name: " + name);
-            }
+
 
         } catch (Exception e) {
             System.err.println("Error retrieving data: " + e.getMessage());
             e.printStackTrace();
+
             genres.add("Error retrieving data.");
+            return genres;
+
+        }
+        if (genres.isEmpty()) {
+            genres.add("No data found for name: " + name);
+            return genres;
         }
 
         return genres;

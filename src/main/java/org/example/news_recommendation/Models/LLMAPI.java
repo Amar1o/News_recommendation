@@ -1,4 +1,4 @@
-package org.example.news_recommendation;
+package org.example.news_recommendation.Models;
 
 
 import org.json.JSONArray;
@@ -9,8 +9,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 public class LLMAPI {
@@ -30,7 +28,7 @@ public String createRequestBody(String newsDescription) {
             "    \"messages\": [\n" +
             "        {\n" +
             "            \"role\": \"user\",\n" +
-            "            \"content\": \"Analyze this news article and determine its category: " +
+            "            \"content\": \"Analyze this news article and determine its category only from one of the following: " +
             "POLITICS, WELLNESS, ENTERTAINMENT, TRAVEL, STYLE & BEAUTY, PARENTING, " +
             "HEALTHY LIVING, QUEER VOICES, FOOD & DRINK, BUSINESS, COMEDY, SPORTS, " +
             "BLACK VOICES, HOME & LIVING, PARENTS. " +
@@ -46,10 +44,8 @@ public String createRequestBody(String newsDescription) {
         String apiResponse = llmAPI.sendingRequest(requestBody);
         Map<String, Double> result = llmAPI.extractedProbabilities(apiResponse);
 
-
         return result;
     }
-
 
     public String LLM(String articlecontent) throws JSONException {
         LLMAPI llmAPI = new LLMAPI();
@@ -67,7 +63,7 @@ public String createRequestBody(String newsDescription) {
                 "    \"messages\": [\n" +
                 "        {\n" +
                 "            \"role\": \"user\",\n" +
-                "            \"content\": \"Analyze the genres and create a probability weight for frequency of appearance in this : " + genre+ " and list each probability from 0 to 1 with the category like [\\n  {\\n    \\\"category\\\": \\\"HEALTH\\\",\\n    \\\"probability\\\": 0.3\\n  }] for easy extraction in JSON format. Do not add any other text in the response. " +
+                "            \"content\": \"Analyze the genres and create a probability weight for frequency of appearance in this : " + genre+ " and list each probability from 0 to 1 with the category like [\\n  {\\n    \\\"category\\\": \\\"SPORTS\\\",\\n    \\\"probability\\\": 0.3\\n  }] for easy extraction in JSON format. Do not add any other text in the response. " +
                  "\"\n" +
                 "        }\n" +
                 "    ]\n" +
@@ -96,8 +92,6 @@ public String createRequestBody(String newsDescription) {
         JSONObject jsonResponse = new JSONObject(response);
         JSONArray choices = jsonResponse.getJSONArray("choices");
         JSONObject message=choices.getJSONObject(0).getJSONObject("message");
-//        JSONObject firstChoice = choices.getJSONObject(0);
-//        JSONObject messageContent = firstChoice.getJSONObject("message");
 
         // Extracting the category from the 'content' field
         String content = message.getString("content");

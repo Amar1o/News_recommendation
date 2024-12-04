@@ -7,14 +7,14 @@
 
 <AnchorPane prefHeight="502.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.news_recommendation.RecommendationController">
     <children>
-        <Button fx:id="prev" layoutX="49.0" layoutY="405.0" mnemonicParsing="false" onAction="#showPreviousArticle" text="Previous" />
-        <Button fx:id="forward" layoutX="221.0" layoutY="405.0" mnemonicParsing="false" onAction="#showNextArticle" text="Forward" />
+        <Button fx:id="forward" layoutX="126.0" layoutY="406.0" mnemonicParsing="false" onAction="#showNextArticle" text="Forward" />
         <TextArea fx:id="title" layoutX="45.0" layoutY="69.0" prefHeight="58.0" prefWidth="206.0" />
         <AnchorPane layoutX="49.0" layoutY="181.0" />
-        <Button fx:id="Article" layoutX="140.0" layoutY="405.0" mnemonicParsing="false" onAction="#displayArticleController" text="Article" />
+        <Button fx:id="Article" layoutX="131.0" layoutY="369.0" mnemonicParsing="false" onAction="#displayArticleController" text="Article" />
         <TextArea fx:id="content" layoutX="45.0" layoutY="159.0" prefHeight="200.0" prefWidth="206.0" />
         <WebView fx:id="web" layoutX="289.0" layoutY="24.0" prefHeight="336.0" prefWidth="570.0" />
-        <Button fx:id="view" layoutX="126.0" layoutY="443.0" mnemonicParsing="false" onAction="#viewarticles" text="View Article" />
+        <Button fx:id="view" layoutX="117.0" layoutY="444.0" mnemonicParsing="false" onAction="#viewarticles" text="View Article" />
       <Button fx:id="back" layoutX="797.0" layoutY="431.0" mnemonicParsing="false" onAction="#switchtoarticle" text="Back" />
+      <Button layoutX="522.0" layoutY="382.0" mnemonicParsing="false" onAction="#favarticle" text="Like" />
     </children>
 </AnchorPane>

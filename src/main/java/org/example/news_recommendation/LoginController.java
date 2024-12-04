@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.news_recommendation.Models.Database;
+import org.example.news_recommendation.Models.User;
 
 import java.io.IOException;
 
@@ -26,13 +28,13 @@ public class LoginController {
     @FXML
     public TextField Password;
 
-    static Database sql = new Database();
+
     static User user = new User();
     @FXML
     public void submit() {
         String inputFirstName = firstname.getText();
         String inputpassword = Password.getText();
-        int result = sql.validate(inputFirstName, inputpassword);
+        int result = user.Login(inputFirstName, inputpassword);
         if (result == 1) {
             success.setText("Login successful! Welcome, " + inputFirstName + "!");
             success.setVisible(true);
