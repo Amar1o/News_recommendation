@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="edited code, used better object calling">
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="added error handling when LLM mis interprets article">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/recommendation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/Models/recommendation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RecommendationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/RecommendationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/newsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/newsController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +191,8 @@
       <workItem from="1733217855377" duration="640000" />
       <workItem from="1733227793638" duration="4483000" />
       <workItem from="1733307539907" duration="8535000" />
-      <workItem from="1733316620241" duration="8817000" />
+      <workItem from="1733316620241" duration="12736000" />
+      <workItem from="1733385442905" duration="3348000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -354,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733340215408</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added error handling when LLM mis interprets article">
+      <option name="closed" value="true" />
+      <created>1733345484944</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1733345484944</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +387,8 @@
     <MESSAGE value="made a database class and added multithreading for the loadarticle feature" />
     <MESSAGE value="deleted login class" />
     <MESSAGE value="edited code, used better object calling" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited code, used better object calling" />
+    <MESSAGE value="added error handling when LLM mis interprets article" />
+    <option name="LAST_COMMIT_MESSAGE" value="added error handling when LLM mis interprets article" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

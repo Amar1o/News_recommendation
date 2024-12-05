@@ -39,12 +39,7 @@ public class RecommendationController {
 
     private String genre;
 
-
-
-    private String articlecontent = "";
    static recommendation recom = new recommendation();
-   news newsInstance = new news();
-
    User user = new User();
 
    Database sql = new Database();

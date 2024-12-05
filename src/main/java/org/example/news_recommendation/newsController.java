@@ -135,43 +135,6 @@ public class newsController {
             }
         });
     }
-//    @FXML
-//    public void loadArticlesbutton() {
-//        String filePath = "src/main/java/org/example/news_recommendation/News_Category_Dataset_v3.json";
-//        this.title.setText("Loading articles...");
-//        new Thread(() -> {
-//            try {
-//                int status = news.loadarticlesController(filePath);
-//
-//                Platform.runLater(() -> {
-//                    if (status == 0) {
-//                        try {
-//                            newsInstance.displayArticle(0);
-//                        } catch (JSONException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                        String titl = newsInstance.gettitle();
-//                        String contnt = newsInstance.getcontent();
-//
-//                        this.content.setText(contnt);
-//                        this.title.setText(titl);
-//                        articles = newsInstance.getArticles();
-//
-//
-//
-//                    } else {
-//                        this.title.setText("Error fetching articles.");
-//                        this.content.setText("Unable to load articles. Please check the file format and content.");
-//                    }
-//                });
-//            } catch (Exception e) {
-//                Platform.runLater(() -> {
-//                    this.title.setText("Error");
-//                    this.content.setText("An unexpected error occurred.");
-//                });
-//            }
-//        }).start();
-//    }
 
 
     public void showNextArticle() throws JSONException {
