@@ -81,26 +81,35 @@ public class RegisterController {
             success.setText("Passwords do not match");
             return; // Exit the method if passwords don't match
         }
+        if (fname == null || fname.isEmpty() ||
+                lname == null || lname.isEmpty() ||
+                Pword == null || Pword.isEmpty() ||
+                Rword == null || Rword.isEmpty()) {
+            success.setVisible(true);
+            success.setText("Invalid registration");
+        } else {
 
-        // Only attempt to register if passwords match
-        int result = sql.register(fname, lname, Pword);
+            // Only attempt to register if passwords match
+            int result = sql.register(fname, lname, Pword);
 
-        switch (result) {
-            case 0:
+            switch (result) {
+                case 0:
 
-                success.setVisible(true);
-                success.setText("Member successfully registered!");
+                    success.setVisible(true);
+                    success.setText("Member successfully registered!");
 
-                break;
-            case 1:
+                    break;
+                case 1:
+                    success.setVisible(true);
+                    success.setText("Member already exists");
 
-                success.setText("Member already exists");
-
-                break;
-            default:
-                System.out.println("An error occurred.");
-                success.setText("Registration failed. Please try again.");
-                break;
+                    break;
+                default:
+                    success.setVisible(true);
+                    System.out.println("An error occurred.");
+                    success.setText("Registration failed. Please try again.");
+                    break;
+            }
         }
     }
 }

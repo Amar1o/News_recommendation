@@ -69,7 +69,7 @@ public class LoginController {
             System.err.println("Failed to load Register.fxml.");
         }
     }
-    private void switchtoarticle() {
+    private void switchtoarticle() { //switch article method
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Article.fxml"));

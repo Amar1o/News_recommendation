@@ -55,6 +55,7 @@ public class news {
                 articlecontent = article.get("short_description").getAsString();
             } else {
                 headline = "no title available";
+                System.out.println("no title");
             }
             genre = ll.LLM(articlecontent);
             System.out.println(genre);
