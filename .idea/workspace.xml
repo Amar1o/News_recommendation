@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="cleaning code">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/news_recommendation/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/example/news_recommendation/Register.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="merge branches" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -195,7 +191,7 @@
       <workItem from="1733227793638" duration="4483000" />
       <workItem from="1733307539907" duration="8535000" />
       <workItem from="1733316620241" duration="12736000" />
-      <workItem from="1733385442905" duration="3986000" />
+      <workItem from="1733385442905" duration="4573000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -373,7 +369,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733411324768</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="cleaning code removed new window button">
+      <option name="closed" value="true" />
+      <created>1733411967847</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1733411967847</updated>
+    </task>
+    <task id="LOCAL-00024" summary="merge branches">
+      <option name="closed" value="true" />
+      <created>1733412463022</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1733412463022</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,7 +423,9 @@
     <MESSAGE value="edited code, used better object calling" />
     <MESSAGE value="added error handling when LLM mis interprets article" />
     <MESSAGE value="cleaning code" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaning code" />
+    <MESSAGE value="cleaning code removed new window button" />
+    <MESSAGE value="merge branches" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge branches" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
