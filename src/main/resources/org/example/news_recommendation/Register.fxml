@@ -16,7 +16,7 @@
         <Text layoutX="121.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
         <Text layoutX="121.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Retype password" />
         <Button layoutX="248.0" layoutY="290.0" mnemonicParsing="false" onAction="#Registerc" text="Register" />
-        <Text fx:id="success" layoutX="461.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Success" visible="true" />
+        <Text fx:id="success" layoutX="461.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Success" visible="false" />
       <Button fx:id="back" layoutX="236.0" layoutY="337.0" mnemonicParsing="false" onAction="#switchback" text="Back to login" />
     </children>
 </AnchorPane>

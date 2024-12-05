@@ -49,30 +49,7 @@ public class LoginController {
         }
 
     }
-    public void openNewWindow() {
-        // Create new window in a new thread
-        Thread windowThread = new Thread(() -> {
-            Platform.runLater(() -> {
-                try {
-                    // Create new stage (window)
-                    Stage newStage = new Stage();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                    Parent root = loader.load();
 
-                    // Create scene
-                    Scene scene = new Scene(root);
-                    newStage.setScene(scene);
-                    newStage.setTitle("NEWS");
-
-
-                    newStage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-        });
-        windowThread.start();
-    }
     @FXML
     public void register() {
         try {
