@@ -87,8 +87,6 @@ public class LoginController {
             stage.show();
 
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Failed to load Article.fxml.");
