@@ -20,7 +20,6 @@
                         <Button fx:id="submit" layoutX="257.0" layoutY="259.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
                         <Text fx:id="success" layoutX="262.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="success" visible="false" />
                         <Button fx:id="register" layoutX="256.0" layoutY="72.0" mnemonicParsing="false" onAction="#register" text="Register" />
-                  <Button fx:id="ww" layoutX="462.0" layoutY="72.0" mnemonicParsing="false" onAction="#openNewWindow" text="New window" />
                     </children>
                 </AnchorPane>
             </content>
