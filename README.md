@@ -9,6 +9,8 @@ Personalized article recommendations.
 A database-backed system for storing user details and preferences.
 Intuitive UI built using JavaFX.
 
+Dataset:
+https://www.kaggle.com/datasets/rmisra/news-category-dataset/data
 
 Programming Language: Java (with JavaFX for UI)
 Database: MySQL
@@ -17,9 +19,6 @@ Development Tools: IntelliJ IDEA, Maven
 
 Database Schema
 To set up the required database tables, use the following SQL commands:
-
-Dataset:
-https://www.kaggle.com/datasets/rmisra/news-category-dataset/data
 
 CREATE TABLE members (
     first_name VARCHAR(50) PRIMARY KEY,
