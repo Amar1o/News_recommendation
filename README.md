@@ -18,6 +18,8 @@ Development Tools: IntelliJ IDEA, Maven
 Database Schema
 To set up the required database tables, use the following SQL commands:
 
+Dataset:
+https://www.kaggle.com/datasets/rmisra/news-category-dataset/data
 
 CREATE TABLE members (
     first_name VARCHAR(50) PRIMARY KEY,
