@@ -17,6 +17,11 @@ Database: MySQL
 JSON Parsing: Gson library (JsonArray, JsonObject, JsonParser) for efficient JSON handling.
 Development Tools: IntelliJ IDEA, Maven
 
+Prerequisite to using the code:
+
+To set up and use the application, execute the following SQL commands. No pre existing members are saved; Run the application-> register an account -> Login. 
+Proceed to like and view articles to populate the tables.
+
 Database Schema
 To set up the required database tables, use the following SQL commands:
 
