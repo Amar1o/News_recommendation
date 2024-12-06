@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="Removed button for new window in Login.fxml" />
+    <list default="true" id="3eefc0df-8a1f-40b1-a0c6-0a224845c2f7" name="Changes" comment="instructions provided to run the code">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +63,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/cloned",
     "node.js.detected.package.eslint": "true",
@@ -195,6 +198,7 @@
       <workItem from="1733316620241" duration="12736000" />
       <workItem from="1733385442905" duration="7339000" />
       <workItem from="1733415351060" duration="1585000" />
+      <workItem from="1733416960373" duration="1277000" />
     </task>
     <task id="LOCAL-00001" summary="Create member class">
       <option name="closed" value="true" />
@@ -404,7 +408,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733413124617</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="added validation for registration">
+      <option name="closed" value="true" />
+      <created>1733417060246</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1733417060246</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,7 +434,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create member class" />
     <MESSAGE value="Create register class and attempt database connection" />
     <MESSAGE value="creation of article fxml" />
     <MESSAGE value="ammending of path to json file containing article dataset" />
@@ -446,7 +457,9 @@
     <MESSAGE value="merge branches" />
     <MESSAGE value="update readme file" />
     <MESSAGE value="Removed button for new window in Login.fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed button for new window in Login.fxml" />
+    <MESSAGE value="added validation for registration" />
+    <MESSAGE value="instructions provided to run the code" />
+    <option name="LAST_COMMIT_MESSAGE" value="instructions provided to run the code" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
